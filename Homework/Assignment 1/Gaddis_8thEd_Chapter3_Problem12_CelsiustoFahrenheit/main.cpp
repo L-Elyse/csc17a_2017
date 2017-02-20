@@ -6,7 +6,7 @@
  */
 
 //System Libraries
-#include <cstdlib> //Input/Output Stream Library
+#include <iostream> //Input/Output Stream Library
 using namespace std;
 
 //User Libraries
@@ -18,12 +18,18 @@ using namespace std;
 //Execution Begins Here!
 int main(int argc, char** argv) {
     //Declare Variables
+    float temp, F;
     
     //Input Data
+    cout<<"Let's convert from Celsius to Fahrenheit!"<<endl;
+    cout<<"Please enter a temperature and I will convert it for you."<<endl;
+    cin>>temp;
     
     //Process Data
+    F=(9/5.0*temp)+32;
     
     //Output Data
+    cout<<"Celsius: "<<temp<<" -> Fahrenheit: "<<F<<endl;
     
     //Exit Stage Right!
     return 0;
