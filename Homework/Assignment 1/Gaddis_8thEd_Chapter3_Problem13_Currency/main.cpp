@@ -24,8 +24,9 @@ int main(int argc, char** argv) {
     float euro=.74;
     
     //Input Data
-    cout<<"Let's do some currency conversions"<<endl;
-    cout<<"Enter the USD amount and I will convert it"<<endl;
+    cout<<"Let's do some currency conversions."<<endl;
+    cout<<"Enter the USD amount and I will convert it to both Yen and ";
+    cout<<"Euros."<<endl;
     cin>>dollar;
     
     //Process Data
