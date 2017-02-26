@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Gaddis_8thEd_Chapter3_Problem22_AngleCalculator
+PROJECTNAME=Gaddis_8thEd_Chapter3_Problem16_SeniorCitizenPropertyTax
 
 # Active Configuration
 DEFAULTCONF=Debug
