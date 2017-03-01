@@ -37,15 +37,22 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void Luhn(char cc[],int n){
+void Luhn(char cc[],int n){        
     //Call Credit Card Number
     for(int i=0;i<n;i++){
         cc[i];    //YESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS!!!!!
-        cout<<cc<<endl;
-        
-        i%2==1?static_cast<int>(cc[i])*2:cc[i]*1; ///UGGHH
-        
+        if(cc[i]=i%2==1){
+            if((cc[i]*2)%10+42>57||(cc[i]*2)%10+42<=49){
+                cc[i]=70;
+            }
+            else cc[i];
+        }else cc[i]*1;
+        //        cc[i]=i%2==1?(cc[i]*2)%10+52:cc[i]*1;
     }
+        
+
+        
+
     //Checking Digit Goes Here!
     
     //Put null terminator at the end
