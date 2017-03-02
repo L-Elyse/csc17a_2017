@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
- * Author: Dr. Mark E. Lehr
- * Created on February 21, 2017, 8:35 AM
+ * Author: Laurie Guimont
+ * Created on February 28, 2017, 8:35 PM
  */
 
 //System Libraries
@@ -16,6 +16,7 @@ using namespace std;
 char rndDgit();
 void prpLuhn(char[],int);
 void Luhn(char[],int);
+void chkDgt(char[],int);
 
 int main(int argc, char** argv) {
     //Set the random number seed
@@ -30,26 +31,41 @@ int main(int argc, char** argv) {
     //Now create a function that fills the last digit
     //using the Luhn Algorithm
     cout<<"The random number with Luhn Encoding, Output Here!"<<endl;
-    Luhn(crdCard,SIZE-1);
-    cout<<crdCard<<endl;
+    Luhn(crdCard,SIZE-2);
+    cout<<crdCard;
+    chkDgt(crdCard,SIZE-1);
+    cout<<"The Credit Card is Valid!!\n";
     
     //Exit Stage Right
     return 0;
 }
 
-void Luhn(char cc[],int n){        
+void chkDgt(char cc[],int n){
+    int sum=0;
+    int digit;
+    for(int i=0;i<n;i++){
+        cc[i];
+        sum+=cc[i];
+    }
+    digit=(sum*9)%10;
+    cout<<digit<<endl;
+}
+
+void Luhn(char cc[],int n){ 
+    int sum=0;
     //Call Credit Card Number
     for(int i=0;i<n;i++){
         cc[i];
         if(i%2==1){
             if(cc[i]<50) cc[i]=(cc[i]*2)%10+42;
             else if(cc[i]>=50&&cc[i]<=52) cc[i]=(cc[i]*2)%10+52; 
-            else if (cc[i]>52) cc[i]=48;
+            else if(cc[i]==53) cc[i]=49;
+            else if(cc[i]==54) cc[i]=51;
+            else if(cc[i]==55) cc[i]=53;
+            else if(cc[i]==56) cc[i]=55;
+            else cc[i]=57;
         }
     }
-    
-
-    //Checking Digit Goes Here!
     
     //Put null terminator at the end
     for(int i=n;i<=n+1;i++){
