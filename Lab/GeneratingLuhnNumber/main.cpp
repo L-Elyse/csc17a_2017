@@ -40,18 +40,14 @@ int main(int argc, char** argv) {
 void Luhn(char cc[],int n){        
     //Call Credit Card Number
     for(int i=0;i<n;i++){
-        cc[i];    //YESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS!!!!!
-        if(cc[i]=i%2==1){
-            if((cc[i]*2)%10+42>57||(cc[i]*2)%10+42<=49){
-                cc[i]=70;
-            }
-            else cc[i];
-        }else cc[i]*1;
-        //        cc[i]=i%2==1?(cc[i]*2)%10+52:cc[i]*1;
+        cc[i];
+        if(i%2==1){
+            if(cc[i]<50) cc[i]=(cc[i]*2)%10+42;
+            else if(cc[i]>=50&&cc[i]<=52) cc[i]=(cc[i]*2)%10+52; 
+            else if (cc[i]>52) cc[i]=48;
+        }
     }
-        
-
-        
+    
 
     //Checking Digit Goes Here!
     
