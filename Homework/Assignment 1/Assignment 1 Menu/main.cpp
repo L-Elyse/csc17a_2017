@@ -70,6 +70,7 @@ void prob1(){
     F=(9/5.0*temp)+32;
     
     //Output Data
+    cout<<fixed<<setprecision(1)<<showpoint;
     cout<<"Celsius: "<<temp<<" -> Fahrenheit: "<<F<<endl;
     cout<<"-------------------------------"<<endl;
     
