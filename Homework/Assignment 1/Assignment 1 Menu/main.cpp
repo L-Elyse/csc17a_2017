@@ -10,10 +10,6 @@
 #include <iomanip>    //Formatting Library
 using namespace std;  //Iostream uses the standard namespace
 
-//User Libraries
-
-//Global Constants - PI, Gravity, Conversions
-
 //Function Prototypes
 void prob1();
 void prob2();
@@ -24,10 +20,10 @@ void menu();
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
-    //Declare variables, no doubles
+    //Declare Variables
     char choice, cont;
     
-    //Input data
+    //Input Data
     do{
         menu();
         cin>>choice;
@@ -55,8 +51,7 @@ int main(int argc, char** argv) {
 //000000111111122222223333333344444444455555555556666666667777777788888899999990
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
 //
-//Inputs - temp, F
-//Outputs - Temperature Conversion
+//Purpose - Temperature Conversion
 void prob1(){
      //Declare Variables
     float temp, F;
@@ -84,8 +79,7 @@ void prob1(){
 //000000111111122222223333333344444444455555555556666666667777777788888899999990
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
 //
-//Inputs - dollar, yconv, econv
-//Outputs - Currency Conversions
+//Purpose - Currency Conversions
 void prob2(){
     //Declare Variables
     float dollar, yconv, econv;
@@ -118,14 +112,13 @@ void prob2(){
 //000000111111122222223333333344444444455555555556666666667777777788888899999990
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
 //
-//Inputs - actual, assess1, assess2, taxrate, quarter, proptax
-//Outputs - Senior Citizen Property Tax
+//Purpose - Senior Citizen Property Tax
 void prob3(){
-    //Declare variables, no doubles
+    //Declare Variables
     float actual,assess1,assess2,taxrate,quarter,proptax;
     float exempt=5000.00;
     
-    //Input data
+    //Input Data
     cout<<"This program assess the amount of property tax a senior citizen ";
     cout<<"will be charged for a property"<<endl;
     cout<<"Please enter the actual value of the property: ";
@@ -134,13 +127,13 @@ void prob3(){
     cout<<"value: ";
     cin>>taxrate;
     
-    //Process data
+    //Process Data
     assess1=actual*.60;
     assess2=assess1-exempt;
     proptax=assess2/100*taxrate;
     quarter=proptax/4;    
         
-    //Output data
+    //Output Data
     cout<<fixed<<setprecision(2)<<showpoint<<endl;
     cout<<"Actual Value:                       $"<<setw(10)<<actual<<endl;
     cout<<"Assessed Value (before exemptions): $"<<setw(10)<<assess1<<endl;
@@ -160,8 +153,7 @@ void prob3(){
 //000000111111122222223333333344444444455555555556666666667777777788888899999990
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
 //
-//Inputs - month, year
-//Outputs - Number of Days in Month in Particular Year
+//Purpose - Number of Days in Month in Particular Year
 void prob4(){
     //Declare Variables
     unsigned int month, year;
@@ -214,10 +206,9 @@ void prob4(){
 //000000111111122222223333333344444444455555555556666666667777777788888899999990
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
 //
-//Inputs - package, minutes, extra;
-//Outputs - Total Monthly Bill
+//Purpose - Total Monthly Bill
 void prob5(){
-    //Declare Variables, no doubles
+    //Declare Variables
     char package;
     float minutes,extra;
     float A=39.99, B=59.99, C=69.99;
@@ -279,9 +270,7 @@ void prob5(){
 //000000111111122222223333333344444444455555555556666666667777777788888899999990
 //345678901234567890123456789012345678901234567890123456789012345678901234567890
 //
-//Displays Menu
-//Inputs - None
-//Outputs - The Menu
+//Purpose - Displays Menu
 void menu(){
     cout<<"Menu Program for Assignment 1"<<endl;
     cout<<"Simply choose the number for the problem to display"<<endl;

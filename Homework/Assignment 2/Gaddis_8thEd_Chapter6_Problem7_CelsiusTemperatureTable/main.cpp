@@ -46,6 +46,6 @@ void celsius(float temp){
     cout<<fixed<<setprecision(2)<<showpoint;
     cout<<"\t  "<<setw(6)<<temp<<"\t   "<<setw(6)<<C<<endl;
     
-    //Exit
+    //Return to Main
     return;
 }
