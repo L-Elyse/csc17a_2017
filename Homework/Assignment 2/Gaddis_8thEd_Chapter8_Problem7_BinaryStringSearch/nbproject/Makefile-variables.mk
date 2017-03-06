@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=helloworld
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/helloworld
+CND_ARTIFACT_NAME_Debug=gaddis_8thed_chapter8_problem7_binarystringsearch
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/gaddis_8thed_chapter8_problem7_binarystringsearch
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=helloworld.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/helloworld.tar
+CND_PACKAGE_NAME_Debug=gaddis8thedchapter8problem7binarystringsearch.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/gaddis8thedchapter8problem7binarystringsearch.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=helloworld
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/helloworld
+CND_ARTIFACT_NAME_Release=gaddis_8thed_chapter8_problem7_binarystringsearch
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/gaddis_8thed_chapter8_problem7_binarystringsearch
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=helloworld.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/helloworld.tar
+CND_PACKAGE_NAME_Release=gaddis8thedchapter8problem7binarystringsearch.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/gaddis8thedchapter8problem7binarystringsearch.tar
 #
 # include compiler specific variables
 #

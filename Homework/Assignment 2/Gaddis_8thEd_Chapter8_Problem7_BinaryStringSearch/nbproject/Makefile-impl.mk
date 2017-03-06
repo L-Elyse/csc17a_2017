@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=HelloWorld
+PROJECTNAME=Gaddis_8thEd_Chapter8_Problem7_BinaryStringSearch
 
 # Active Configuration
 DEFAULTCONF=Debug
