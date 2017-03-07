@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=assignment_1_menu
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/assignment_1_menu
+CND_ARTIFACT_NAME_Debug=part_1_menu
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/part_1_menu
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=assignment1menu.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/assignment1menu.tar
+CND_PACKAGE_NAME_Debug=part1menu.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/part1menu.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=assignment_1_menu
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/assignment_1_menu
+CND_ARTIFACT_NAME_Release=part_1_menu
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/part_1_menu
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=assignment1menu.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/assignment1menu.tar
+CND_PACKAGE_NAME_Release=part1menu.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/part1menu.tar
 #
 # include compiler specific variables
 #

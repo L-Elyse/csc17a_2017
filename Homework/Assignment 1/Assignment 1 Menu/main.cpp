@@ -50,17 +50,17 @@ void problem10();
     }
     void Menu()
     {
-           cout<<"Type 1 for problem 1"<<endl;
-           cout<<"Type 2 for problem 2"<<endl;
-           cout<<"Type 3 for problem 3"<<endl;
-           cout<<"Type 4 for problem 4"<<endl;
-           cout<<"Type 5 for problem 5"<<endl;
-           cout<<"Type 6 for problem 6"<<endl;
-           cout<<"Type 7 for problem 7"<<endl;
-           cout<<"Type 8 for problem 8"<<endl;
-           cout<<"Type 9 for problem 9"<<endl;
-           cout<<"Type 10 for problem 10"<<endl;
-           cout<<"Type 11 to exit \n"<<endl;
+           cout<<"Type 1 for Problem 1: Temperature Conversion"<<endl;
+           cout<<"Type 2 for Problem 2: Currency Conversion"<<endl;
+           cout<<"Type 3 for Problem 3: Senior Citizen Property Tax"<<endl;
+           cout<<"Type 4 for Problem 4: Number of Days in Month of Year"<<endl;
+           cout<<"Type 5 for Problem 5: Total Monthly Phone Bill"<<endl;
+           cout<<"Type 6 for Problem 6: Average Yearly Rainfall"<<endl;
+           cout<<"Type 7 for Problem 7: Fahrenheit->Celsius Display"<<endl;
+           cout<<"Type 8 for Problem 8: Rain or Shine"<<endl;
+           cout<<"Type 9 for Problem 9: Lottery Simulation"<<endl;
+           cout<<"Type 10 for Problem 10: Binary String Search"<<endl;
+           cout<<"Type 11 to Exit \n"<<endl;
     }
     int getN()
     {
@@ -110,8 +110,8 @@ void problem10();
         float actual,assess1,assess2,taxrate,quarter,proptax;
         float exempt=5000.00;
         //Input Data
-        cout<<"This program assess the amount of property tax a senior ";
-        cout<<"citizen will be charged for a property"<<endl;
+        cout<<"This program assesses the amount of property tax a senior ";
+        cout<<"citizen will be charged for a property."<<endl;
         cout<<"Please enter the actual value of the property: ";
         cin>>actual;
         cout<<"Now please enter the current tax rate for each $100 of ";
@@ -137,6 +137,9 @@ void problem10();
         //Declare Variables
         unsigned int month, year;
         //Input Data
+        cout<<"This program determines how many days are in a month of a ";
+        cout<<"specified year. The key is to find out if the year you enter ";
+        cout<<"is a leap year or not."<<endl;
         cout<<"Enter a month (1-12): ";
         cin>>month;
         cout<<"Enter a year: ";
@@ -151,22 +154,22 @@ void problem10();
             case 8:
             case 10:
             case 12: 
-                cout<<"31 days"<<endl;
+                cout<<"There are 31 days in this month in "<<year<<endl;
                 break;
             case 4:
             case 6:
             case 9:
             case 11:
-                cout<<"30 days"<<endl;
+                cout<<"There are 30 days in this month in "<<year<<endl;
                 break;
             case 2:
                 if(year%100==0){
                     if(year%400==0)
-                        cout<<"29 days"<<endl;
+                        cout<<"There are 29 days in this month in "<<year<<endl;
                 }else if(year%4==0)
-                    cout<<"29 days"<<endl;
+                    cout<<"There are 29 days in this month in "<<year<<endl;
                 else
-                    cout<<"28 days"<<endl;
+                    cout<<"There are 28 days in this month in "<<year<<endl;
                 break;
             default:
                 cout<<"Not a valid entry. Sorry"<<endl;        
@@ -179,7 +182,6 @@ void problem10();
         char package;
         float minutes,extra;
         float A=39.99, B=59.99, C=69.99;
-
         //Input Data
         cout<<"This program calculates a monthly mobile phone bill."<<endl;
         cout<<"There are three different packages: "<<endl;
@@ -193,7 +195,6 @@ void problem10();
         cout<<"Now enter the total minutes used this month: ";
         cin>>minutes;
         cout<<endl;
-
         //Process and Output Data
         switch(package){
             case 'a':
@@ -265,6 +266,7 @@ void problem10();
         cout<<endl;
         cout<<"Average Rainfall over "<<years<<" year(s) is "<<average;
         cout<<" inches\n";
+        cout<<"-------------------------------"<<endl;
     }
     void problem7()
     {
@@ -275,14 +277,16 @@ void problem10();
         int times=21;
         //Call Function to Display Table 
         cout<<"I will call a function that will display temperatures 0 ";
-        cout<<"through 20 in Fahrenheit and then convert all temperatures ";
-        cout<<"to Celsius."<<endl<<endl;
+        cout<<"through 20 in Fahrenheit and then will convert all ";
+        cout<<"temperatures to Celsius."<<endl<<endl;
         cout<<"\tFahrenheit\t   Celsius"<<endl;
         cout<<"\t--------------------------"<<endl;
         for(int i=0;i<times;i++)
             celsius(i);
+        cout<<"-------------------------------"<<endl;
     }
-        void celsius(float temp){
+        void celsius(float temp)
+        {
             //Declare Variables
             float C;
             //Process Data
@@ -302,8 +306,10 @@ void problem10();
         char rcs[ROW][COL];
         //Process & Output the Data
         process(rcs,ROW);
+        cout<<"-------------------------------"<<endl;
     }
-        void process(char rcs [][COL],int r){
+        void process(char rcs [][COL],int r)
+        {
             //Function Prototype
             void readin(string [],char [][COL], int);
             //Declare Variables
@@ -353,12 +359,16 @@ void problem10();
             //Return to Problem 8
             return;
         }
-        void readin(string months[],char rcs[][COL],int r){
+        void readin(string months[],char rcs[][COL],int r)
+        {
             //Declare the File
             ifstream in;
             //Open the Input File
             in.open("RainorShine.txt");
             //Read In the File
+            cout<<"Below is an array that describes the weather conditions ";
+            cout<<"for each day in June, July, and August."<<endl;
+            cout<<"No data was recorded for the 31st days in July or August.\n";
             for(int i=0;i<r;i++){
                 cout<<months[i]<<":  ";
                 for(int j=0;j<COL;j++){
@@ -402,8 +412,10 @@ void problem10();
             cout<<"YOU WON!!!!! Congratulations!"<<endl;
         else
             cout<<"Sorry. You lost. Maybe you'll win next time!"<<endl;
+        cout<<"-------------------------------"<<endl;
     }
-        void guess(int user[],int size){
+        void guess(int user[],int size)
+        {
            //Accept User Input
             for(int i=0;i<size;i++){
                 cin>>user[i];
@@ -411,7 +423,8 @@ void problem10();
             //Return to Problem 9
             return;
         }
-        void random(int winning[],int size){
+        void random(int winning[],int size)
+        {
             //Set Random Number Seed
             srand(static_cast<unsigned int>(time(0)));
             //Declare Variables
@@ -429,7 +442,6 @@ void problem10();
 	//Function Prototypes
         void sort(string[],int);
         int binsrch(string[],int,string);
-
         //Declare Variables
         const int SIZE=20;
         int results;
@@ -453,8 +465,10 @@ void problem10();
             cout<<"Sorry. That name is not in the list."<<endl;
         else
             cout<<"That name is found at element "<<results<<" in the array\n";
+        cout<<"-------------------------------"<<endl;
     }
-        int binsrch(string names[],int size, string value){   
+        int binsrch(string names[],int size, string value)
+        {   
             //Declare Variables
             int first=0,
                last=size-1,
@@ -476,7 +490,8 @@ void problem10();
            //Return Position to Problem 10
            return position;
         }
-        void sort(string names[],int size){
+        void sort(string names[],int size)
+        {
             //Declare Variables
             int start,mindx;
             string minval;
@@ -497,7 +512,7 @@ void problem10();
             cout<<"Here is a list of names alphabetized by last name:"<<endl;
             cout<<"--------------------------------------------------"<<endl;
             for(int j=0;j<size;j++)
-                cout<<names[j]<<endl;
+                cout<<"\t"<<names[j]<<endl;
             cout<<endl;
             //Return to Problem 10
             return;
