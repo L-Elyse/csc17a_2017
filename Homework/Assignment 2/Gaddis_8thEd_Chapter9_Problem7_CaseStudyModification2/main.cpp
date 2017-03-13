@@ -48,6 +48,10 @@ int main(int argc, char** argv) {
     cout<<"The donations, sorted in their original order are: \n";
     showAry(array,donate);
     
+    //Delete Array
+    delete []array;
+    delete []ptr;
+    
     //Exit Stage Right!
     return 0;
 }
