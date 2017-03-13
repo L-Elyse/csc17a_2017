@@ -20,11 +20,14 @@ void *prntAry(int *,int,int);
 //Execution Begins Here!
 int main(int argc, char** argv) {
     //Declare variables, no doubles
-    int size=50;
-    int *array=fillAry(size);
+    const int SIZE=50;
+    int *array=fillAry(SIZE);
     
     //Print Array
-    prntAry(array,size,10);
+    prntAry(array,SIZE,10);
+    
+    //Delete Pointer
+    delete []array;
     
     //Exit Stage Right!
     return 0;
