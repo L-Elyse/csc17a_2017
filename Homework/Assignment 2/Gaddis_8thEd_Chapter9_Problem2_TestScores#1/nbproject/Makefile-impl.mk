@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Gaddis_8thEd_Chapter9_Problem1_ArrayAllocator
+PROJECTNAME=Gaddis_8thEd_Chapter9_Problem2_TestScores#1
 
 # Active Configuration
 DEFAULTCONF=Debug
