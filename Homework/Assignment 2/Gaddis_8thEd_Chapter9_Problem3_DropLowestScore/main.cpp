@@ -17,6 +17,7 @@ using namespace std;
 //Function Prototypes
 int *gettest(int);
 int *sort(int *,int);
+int *dropLow(int *,int);
 void average(int *,int);
 
 //Execution Begins Here!
@@ -35,10 +36,18 @@ int main(int argc, char** argv) {
     cout<<"The "<<scores<<" tests that you would like to average are: { ";
     for(int i=0;i<scores;i++)
         cout<<tests[i]<<" ";
-    cout<<"}"<<endl;
+    cout<<"}"<<endl;            
     
+    //Drop Lowest Test Score
+    tests=dropLow(tests,(scores-1));
+    cout<<"But wait!! Let's drop the lowest test score!"<<endl;
+    cout<<"Now you are only finding the average of : { ";
+    for(int i=0;i<(scores-1);i++)
+        cout<<tests[i]<<" ";
+    cout<<"}"<<endl;
+            
     //Calculate & Display Average
-    average(tests,scores);
+    average(tests,(scores-1));
     delete []tests;
     
     //Exit Stage Right!
@@ -53,6 +62,15 @@ void average(int *a,int n){
     mean=sum/n;
     cout<<fixed<<setprecision(1)<<showpoint;
     cout<<"The average of your values is: "<<mean<<endl;
+}
+
+int *dropLow(int *a,int n){
+    int *b=new int[n];
+    for(int i=0;i<n;i++){
+        b[i]=a[i+1];
+    }
+    delete []a;
+    return b;
 }
 
 int *sort(int *a,int n){

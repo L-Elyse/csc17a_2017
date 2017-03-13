@@ -57,7 +57,6 @@ int *copyAry(int *a,int n,int m){
         if(i<n)b[i]=a[i];
         else b[i]=i;
     }
-    delete []a;
     return b;
 }
 
