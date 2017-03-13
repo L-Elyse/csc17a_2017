@@ -1,8 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on March 12, 2017, 10:00 PM
- * Purpose: Dynamically Allocate Donation Array
+ * Created on March 12, 2017, 10:50 PM
+ * Purpose: Sort Array in Descending Order
  */
 
 //System Libraries
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     arrSort(ptr,donate);
     
     //Output the Data
-    cout<<"The donations,sorted in ascending order are: \n";
+    cout<<"The donations,sorted in descending order are: \n";
     showPtr(ptr,donate);
     
     cout<<"The donations, sorted in their original order are: \n";
@@ -72,7 +72,7 @@ void arrSort(int *a,int n){
         minIndx=start;
         minElem=a[start];
         for(int i=start+1;i<n;i++){
-            if(a[i]<minElem){
+            if(a[i]>minElem){
                 minElem=a[i];
                 minIndx=i;
             }
