@@ -39,6 +39,7 @@ void *prntAry(int *a,int n,int perLine){
         if(i%perLine==(perLine-1))
             cout<<endl;
     }
+    cout<<endl;
 }
 
 int *fillAry(int n){

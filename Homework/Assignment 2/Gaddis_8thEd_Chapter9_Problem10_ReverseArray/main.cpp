@@ -6,8 +6,8 @@
  */
 
 //System Libraries
-#include <iostream>//Input/Output Stream Library
-using namespace std;//Iostream uses the standard namespace
+#include <iostream>
+using namespace std;
 
 //User Libraries
 
