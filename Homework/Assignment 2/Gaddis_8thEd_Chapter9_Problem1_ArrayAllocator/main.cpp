@@ -45,7 +45,7 @@ void *prntAry(int *a,int n,int perLine){
 int *fillAry(int n){
     //Declare New Array
     int *a=new int[n];
-    for(int i;i<n;i++)
+    for(int i=0;i<n;i++)
         a[i]=i*2;
     return a;
 }

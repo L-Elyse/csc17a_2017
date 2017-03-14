@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on March 13, 2014, 8:00 PM
+ * Created on March 13, 2017, 8:00 PM
  * Purpose: Array Expander
  */
 

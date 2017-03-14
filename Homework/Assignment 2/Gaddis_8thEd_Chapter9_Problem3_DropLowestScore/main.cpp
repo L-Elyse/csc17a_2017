@@ -1,8 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on March 12, 2017 7:00 PM
- * Purpose: Test Scores
+ * Created on March 12, 2017, 7:00 PM
+ * Purpose: Drop Lowest Test Score
  */
 
 //System Libraries

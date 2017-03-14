@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on March 12, 2016, 9:27 PM
+ * Created on March 12, 2017, 9:27 PM
  * Purpose: Mean, Median, Mode with Dynamic Memory Allocation
  */
 
