@@ -68,6 +68,8 @@ void problem8();
         int *array=fillAry(SIZE);
 
         //Print Array
+        cout<<"This program writes a function that dynamically allocates ";
+        cout<<"an array and returns a pointer to the array."<<endl;
         prntAry(array,SIZE,10);
 
         //Delete Pointer
@@ -99,6 +101,7 @@ void problem8();
         int *tests;
 
         //Get Size from User
+        cout<<"This program calculates Test Averages"<<endl;
         cout<<"How many test scores would you like to enter? ";
         cin>>scores;
         tests=gettest(scores);
@@ -162,6 +165,8 @@ void problem8();
         int *tests;
 
         //Get Size from User
+        cout<<"This program drops the lowest test score, then calculates ";
+        cout<<"the average."<<endl;
         cout<<"How many test scores would you like to enter? ";
         cin>>scores;
         tests=gettest(scores);
@@ -206,6 +211,8 @@ void problem8();
         int *array,*ptr;
 
         //Ask for Size & Fill the Array
+        cout<<"This program takes in as many donations as the user wants, ";
+        cout<<"sorts them, and displays them in ascending order."<<endl;
         cout<<"How many donations would you like to input?"<<endl;
         cin>>donate; 
         array=fllAry4(donate);
@@ -282,6 +289,8 @@ void problem8();
         int *array,*ptr;
 
         //Ask for Size & Fill the Array
+        cout<<"This program takes in as many donations as the user wants, ";
+        cout<<"sorts them, and displays them in descending order."<<endl;
         cout<<"How many donations would you like to input?"<<endl;
         cin>>donate; 
         array=fllAry4(donate);
@@ -335,6 +344,8 @@ void problem8();
         int *newAry;
 
         //Copy and Reverse Array
+        cout<<"This program displays an array, then displays the same array ";
+        cout<<"in reversed order"<<endl;
         prntAry(array,SIZE,10);
         newAry=copyAry(array,SIZE);
 
@@ -368,7 +379,6 @@ void problem8();
         const int SIZE=100;
         int *array=fllAry2(SIZE);
         int *newAry;
-
         //Copy & Expand Array
         cout<<"Array Expanded: \n";
         newAry=cpyAry1(array,SIZE);
@@ -379,6 +389,7 @@ void problem8();
         int *cpyAry1(int *a,int n){
             //Function Prototype
             void *prtAry1(int*,int,int);
+            //Variables
             int size=n*2;
             int *b=new int[size];
             for(int i=0;i<size;i++)
@@ -404,6 +415,9 @@ void problem8();
                 a[i]=i*5;
             }
             //Print the Array
+            cout<<"This program displays an array, then expands it by ";
+            cout<<"increase the size by a factor of 2.\n";
+            cout<<"However, it initializes all the unused elements to 0"<<endl;
             prtAry1(a,n,10);
 
             return a;
@@ -487,11 +501,12 @@ void problem8();
         }
         void mean(int *a,int n){
             int total=0;
-            int average;
+            float average;
             for(int i=0;i<n;i++){
                 total+=a[i];
             }
-            average=total/n;
+            average=total/(n*1.0);
+            cout<<fixed<<setprecision(1)<<showpoint;
             cout<<"The average is: "<<average<<endl;
         }
         void *sortAry(int *a,int n){
