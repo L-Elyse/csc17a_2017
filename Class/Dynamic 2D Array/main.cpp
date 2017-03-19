@@ -18,6 +18,7 @@ using namespace std;
 //Function Prototypes
 int **fillAry(int,int);
 void prntAry(int **,int,int);
+void prntAds(int **,int,int);
 void destroy(int **,int);
 
 //Execution Begins Here!
@@ -33,8 +34,10 @@ int main(int argc, char** argv) {
     //Print Out the Copied/Resized Array
     cout<<"Array 'Array' "<<array<<endl;
     prntAry(array,row1,col1);
+    prntAds(array,row1,col1);
     cout<<"Array 'Brray' "<<brray<<endl;
     prntAry(brray,row2,col2);
+    prntAds(brray,row2,col2);
     
     //Delete the array
     destroy(array,row1);
@@ -49,6 +52,17 @@ void destroy(int **a,int rows){
         delete[]a[row];
     }
     delete []a;
+}
+
+void prntAds(int **a,int rows,int cols){
+    cout<<endl;
+    for(int row=0;row<rows;row++){
+        for(int col=0;col<cols;col++){
+            cout<<&a[row][col]<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
 }
 
 void prntAry(int **a,int rows,int cols){
