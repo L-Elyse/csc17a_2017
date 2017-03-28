@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Dynamic Memory Database Sort - Structures_Pointers
+PROJECTNAME=Gaddis_8thEd_Chapter11_Problem2_MovieData
 
 # Active Configuration
 DEFAULTCONF=Debug

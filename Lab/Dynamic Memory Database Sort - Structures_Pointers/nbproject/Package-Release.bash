@@ -13,9 +13,9 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=dll
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dynamic_memory_database_sort_-_structures_-_pointers
-OUTPUT_BASENAME=dynamic_memory_database_sort_-_structures_-_pointers
-PACKAGE_TOP_DIR=dynamicmemorydatabasesort-structures-pointers/
+OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dynamic_memory_database_sort_-_structures_pointers
+OUTPUT_BASENAME=dynamic_memory_database_sort_-_structures_pointers
+PACKAGE_TOP_DIR=dynamicmemorydatabasesort-structurespointers/
 
 # Functions
 function checkReturnCode
@@ -60,15 +60,15 @@ mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/dynamicmemorydatabasesort-structures-pointers/bin"
+makeDirectory "${NBTMPDIR}/dynamicmemorydatabasesort-structurespointers/bin"
 copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/dynamicmemorydatabasesort-structures-pointers.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/dynamicmemorydatabasesort-structurespointers.tar
 cd ${NBTMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/dynamicmemorydatabasesort-structures-pointers.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/dynamicmemorydatabasesort-structurespointers.tar *
 checkReturnCode
 
 # Cleanup

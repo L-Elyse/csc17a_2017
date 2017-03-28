@@ -16,6 +16,8 @@ using namespace std;
 //Global Constants
 
 //Function Prototypes
+void highest(weather,int);
+void lowest(weather,int);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -59,7 +61,12 @@ int main(int argc, char** argv) {
     cout<<"Here are the results: "<<endl;
     cout<<"Total Rainfall: "<<totalr<<endl;
     cout<<"Average Rainfall: "<<avgtemp<<endl;
+    highest(array,SIZE);
     
     //Exit Stage Right!
     return 0;
+}
+
+void highest(weather a,int n){
+    cout<<"Hello"<<endl;
 }
