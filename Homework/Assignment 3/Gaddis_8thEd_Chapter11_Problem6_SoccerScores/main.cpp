@@ -89,8 +89,16 @@ scores *fillAry(scores p[],int n){
         getline(cin,p[i].name);
         cout<<"Number: ";
         cin>>p[i].number;
+        while(p[i].number<0){
+            cout<<"No negatives! Enter a positive number.";
+            cin>>p[i].number;
+        }
         cout<<"Points Scores: ";
         cin>>p[i].points;
+        while(p[i].points<0){
+            cout<<"No negatives! Enter a positive number.";
+            cin>>p[i].points;
+        }
         cin.ignore();
     }
     return p;
