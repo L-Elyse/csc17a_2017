@@ -20,8 +20,6 @@ enum Months {JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST,
 
 //Function Prototypes
 void display(Months);
-void highest(weather [],int);
-void lowest(weather [],int);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -63,9 +61,8 @@ int main(int argc, char** argv) {
     avgtemp/=12;
     
     //Output data
+    cout<<endl;
     cout<<"Here are the results: "<<endl;
-    highest(array,SIZE);
-    lowest(array,SIZE);
     cout<<fixed<<setprecision(1)<<showpoint;
     cout<<"Average Temperature: "<<avgtemp<<endl;
     cout<<"Total Rainfall: "<<totalr<<endl;
@@ -73,44 +70,6 @@ int main(int argc, char** argv) {
     
     //Exit Stage Right!
     return 0;
-}
-
-void lowest(weather a[],int n){
-    Months index;
-    float lowest;
-    for(Months i=JANUARY;i<=NOVEMBER;i=static_cast<Months>(i+1)){
-        for(Months j=FEBRUARY;j<=DECEMBER;j=static_cast<Months>(j+1)){
-            if(a[i].low<a[j].low){
-                if(a[i].low<lowest){
-                    index=i;
-                    lowest=a[i].low;
-                }
-            }
-        }
-    }
-    cout<<"The lowest temperature for the year is "<<lowest<<" degrees ";
-    cout<<"which occurred in ";
-    display(index);
-    cout<<endl;
-}
-
-void highest(weather a[],int n){
-    Months index;
-    float highest;
-    for(Months i=JANUARY;i<=NOVEMBER;i=static_cast<Months>(i+1)){
-        for(Months j=FEBRUARY;j<=DECEMBER;j=static_cast<Months>(j+1)){
-            if(a[i].high>a[j].high){
-                if(a[i].high>highest){
-                    highest=a[i].high;
-                    index=i;
-                }
-            }
-        }
-    }
-    cout<<"The highest temperature for the year was "<<highest<<" degrees ";
-    cout<<"which occurred in ";
-    display(index);
-    cout<<endl;
 }
 
 void display(Months m){
