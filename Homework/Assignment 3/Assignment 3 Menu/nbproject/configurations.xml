@@ -4,9 +4,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Account.h</itemPath>
       <itemPath>Movie Data Mod.h</itemPath>
       <itemPath>Movie Data.h</itemPath>
       <itemPath>Sales.h</itemPath>
+      <itemPath>Soccer.h</itemPath>
+      <itemPath>Speaker.h</itemPath>
       <itemPath>Weather.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -51,11 +54,17 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Account.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Movie Data Mod.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Movie Data.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Sales.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Soccer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Speaker.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Weather.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -82,11 +91,17 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Account.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Movie Data Mod.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Movie Data.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Sales.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Soccer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Speaker.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Weather.h" ex="false" tool="3" flavor2="0">
       </item>

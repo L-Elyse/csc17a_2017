@@ -34,10 +34,6 @@ int main(int argc, char** argv) {
     teampts(points,SIZE);
     highest(points,SIZE);
     
-    //Process data
-    
-    //Output data
-    
     //Exit Stage Right!
     return 0;
 }

@@ -12,8 +12,13 @@ using namespace std;
 #include "Movie Data Mod.h"
 #include "Sales.h"
 #include "Weather.h"
+#include "Soccer.h"
+#include "Account.h"
+#include "Speaker.h"
 
 //Global Constants
+enum Months {JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST,
+                 SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER};
 
 //Function Prototypes
 void Menu();
@@ -78,6 +83,7 @@ void problem8();
         display(movie1);
         cout<<endl;
         display(movie2);
+        cout<<endl;
     }
         void display(movie m){
         //Print  Movie Information to the Screen
@@ -98,6 +104,7 @@ void problem8();
         disply1(movie1);
         cout<<endl;
         disply1(movie2);
+        cout<<endl;
     }
         void disply1(modify m){
         //Print  Movie Information to the Screen
@@ -126,6 +133,7 @@ void problem8();
         second(dvsion2);
         third(dvsion3);
         fourth(dvsion4);
+        cout<<endl;
     }
         void first(Sales d1){
             //Get the Amount of Sales
@@ -270,6 +278,7 @@ void problem8();
         cout<<"Average Temperature: "<<avgtemp<<endl;
         cout<<"Total Rainfall: "<<totalr<<endl;
         cout<<"Average Rainfall: "<<avrgr<<endl;
+        cout<<endl;
     }
         void lowest(weather a[],int n){
             int index;
@@ -306,261 +315,299 @@ void problem8();
     void problem5()
     {
         //Function Prototypes
-        void arrSrtD(int *, int);
+        void disply2(Months);
         //Declare variables, no doubles
-        int donate;
-        int *array,*ptr;
+        const int SIZE=12;
+        weather array[SIZE];
+        float totalr=0,avrgr,avgtemp=0;
 
-        //Ask for Size & Fill the Array
-        cout<<"This program takes in as many donations as the user wants, ";
-        cout<<"sorts them, and displays them in descending order."<<endl;
-        cout<<"How many donations would you like to input?"<<endl;
-        cin>>donate; 
-        array=fllAry4(donate);
-
-        //Pointer array
-        ptr=loopPtr(donate);
+        //Input data
+        cout<<"This program computes weather statistics for the year. \n";
+        for(Months i=JANUARY;i<SIZE;i=static_cast<Months>(i+1)){
+            cout<<"Please enter the following for ";
+            disply2(i);
+            cout<<": "<<endl;
+            cout<<"Total Rainfall: ";
+            cin>>array[i].rain;
+            cout<<"High Temperature: ";
+            cin>>array[i].high;
+            while((array[i].high)<-100||(array[i].high)>140){
+                cout<<"Sorry. Only values between -100 and 140 degrees Fahrenheit ";
+                cout<<"are allowed."<<endl;
+                cin>>array[i].high;
+            }
+            cout<<"Low Temperature: ";
+            cin>>array[i].low;
+            while((array[i].low)<-100||(array[i].low)>140){
+                cout<<"Sorry. Only values between -100 and 140 degrees Fahrenheit ";
+                cout<<"are allowed."<<endl;
+                cin>>array[i].low;
+            }
+            //Calculate Averages
+            totalr+=array[i].rain;
+            array[i].average=(array[i].high+array[i].low)/2;
+            avgtemp+=array[i].average;
+        }
 
         //Process data
-        for(int count=0;count<donate;count++)
-            ptr[count]=array[count];
+        avrgr=totalr/12;
+        avgtemp/=12;
 
-        //Sort the Data
-        arrSrtD(ptr,donate);
-
-        //Output the Data
-        cout<<"The donations,sorted in descending order are: \n";
-        showPtr(ptr,donate);
-
-        cout<<"The donations, sorted in their original order are: \n";
-        showAry(array,donate);
-
-        //Delete Array
-        delete []array;
-        delete []ptr;
+        //Output data
+        cout<<endl;
+        cout<<"Here are the results: "<<endl;
+        cout<<fixed<<setprecision(1)<<showpoint;
+        cout<<"Average Temperature: "<<avgtemp<<endl;
+        cout<<"Total Rainfall: "<<totalr<<endl;
+        cout<<"Average Rainfall: "<<avrgr<<endl;
+        cout<<endl;
     }
-        void arrSrtD(int *a,int n){
-            int start, minIndx;
-            int minElem;
-
-            for(start=0;start<n-1;start++){
-                minIndx=start;
-                minElem=a[start];
-                for(int i=start+1;i<n;i++){
-                    if(a[i]>minElem){
-                        minElem=a[i];
-                        minIndx=i;
-                    }
-                }
-                a[minIndx]=a[start];
-                a[start]=minElem;
+        void disply2(Months m){
+            switch(m){
+                case JANUARY: cout<<"January"; break;
+                case FEBRUARY: cout<<"February";break;
+                case MARCH: cout<<"March";break;
+                case APRIL: cout<<"April";break;
+                case MAY: cout<<"May";break;
+                case JUNE: cout<<"June";break;
+                case JULY: cout<<"July";break;
+                case AUGUST: cout<<"August";break;
+                case SEPTEMBER: cout<<"September";break;
+                case OCTOBER: cout<<"October";break;
+                case NOVEMBER: cout<<"November";break;
+                case DECEMBER: cout<<"December";break;
             }
         }
     void problem6()
     {
         //Function Prototypes
-        int *fllAry1(int);
-        int *copyAry(int *,int);
+        scores *fillAry(scores [],int);
+        void disply3(scores [],int);
+        void teampts(scores [],int);
+        void highscr(scores [],int);
         //Declare variables, no doubles
-        const int SIZE=50;
-        int *array=fllAry1(SIZE);
-        int *newAry;
+        int SIZE=12;
+        scores points[SIZE];
+        int total;
 
-        //Copy and Reverse Array
-        cout<<"This program displays an array, then displays the same array ";
-        cout<<"in reversed order"<<endl;
-        prntAry(array,SIZE,10);
-        newAry=copyAry(array,SIZE);
-
-        //Process data
-        prntAry(newAry,SIZE,10);
-
-        //Delete Array
-        delete []newAry;
+        //Input data
+        fillAry(points,SIZE);
+        disply3(points,SIZE);
+        teampts(points,SIZE);
+        highscr(points,SIZE);
+        cout<<endl;
     }
-        int *copyAry(int *a,int n){
-            int *b=new int[n];
-            for(int j=0;j<n;j++)
-                b[j]=a[(n-1)-j];
-            delete []a;
-            return b;
+        void highscr(scores p[],int n){
+            int highest=1,index;
+            for(int i=0;i<n-1;i++){
+                for(int j=i+1;j<n;j++){
+                    if(p[i].points>p[j].points){
+                        if(p[i].points>highest){
+                            highest=p[i].points;
+                            index=i;
+                        }
+                    }
+                }
+            }
+            cout<<endl;
+            cout<<"The player who scored the most points is: "<<endl;
+            cout<<p[index].name<<endl;
+            cout<<p[index].number<<endl;
+            cout<<"They scored "<<highest<<" points. Congratulate them!"<<endl;
         }
-        int *fllAry1(int n){
-            int *a=new int[n];
-            for(int i=0;i<n;i++)
-                a[i]=i;
-
-            return a;
+        void teampts(scores p[],int n){
+            int total=0;
+            for(int i=0;i<n;i++){
+                total+=p[i].points;
+            }
+            cout<<"Total Team Points: "<<total<<endl;
+        }
+        void disply3(scores p[],int n){
+            cout<<endl;
+            cout<<"Here is the Team Roster"<<endl;
+            cout<<"-----------------------"<<endl;
+            for(int i=0;i<n;i++){
+                cout<<"Name:   "<<p[i].name<<endl;
+                cout<<"Number: "<<p[i].number<<endl;
+                cout<<"Points: "<<p[i].points<<endl;
+                cout<<endl;
+            }
+            cout<<endl;
+        }
+        scores *fillAry(scores p[],int n){
+            for(int i=0;i<n;i++){
+                cout<<"Player "<<i+1<<":"<<endl;
+                cout<<"Name: ";
+                getline(cin,p[i].name);
+                cout<<"Number: ";
+                cin>>p[i].number;
+                while(p[i].number<0){
+                    cout<<"No negatives! Enter a positive number.";
+                    cin>>p[i].number;
+                }
+                cout<<"Points Scores: ";
+                cin>>p[i].points;
+                while(p[i].points<0){
+                    cout<<"No negatives! Enter a positive number.";
+                    cin>>p[i].points;
+                }
+                cin.ignore();
+            }
+            return p;
         }
     void problem7()
     {
 	//Function Prototypes
-        int *fllAry2(int);
-        int *cpyAry1(int *,int);
-        void *prtAry1(int *,int,int);
+        int Menu1();
+        void process(int,account [],int);
+        account *adjust(account [],int);
+        account *fill(account [],int,int);
+        void disply4(account [],int);
         //Declare variables, no doubles
-        const int SIZE=100;
-        int *array=fllAry2(SIZE);
-        int *newAry;
-        //Copy & Expand Array
-        cout<<"Array Expanded: \n";
-        newAry=cpyAry1(array,SIZE);
+        int SIZE=10;
+        account custmer[SIZE];
+        int choice,index=0;
 
-        //Delete Array
-        delete []newAry;
+        //Input data
+        fill(custmer,SIZE,index);
+        do{
+        choice=Menu1();
+        process(choice,custmer,SIZE);
+        }while(choice!=3);
+        cout<<endl;
     }
-        int *cpyAry1(int *a,int n){
-            //Function Prototype
-            void *prtAry1(int*,int,int);
-            //Variables
-            int size=n*2;
-            int *b=new int[size];
-            for(int i=0;i<size;i++)
-                i>(n-1)?(b[i]=0):(b[i]=a[i]);
-
-            //Print the Array
-            prtAry1(b,size,10);
-
-            delete []a;
-            return b;
-        }
-        void *prtAry1(int *a,int n,int perLine){
+        void disply4(account c[],int n){
             for(int i=0;i<n;i++){
-                cout<<setw(4)<<a[i];
-                if((i%perLine)==(perLine-1))
-                    cout<<endl;
+                cout<<endl;
+                cout<<c[i].name<<endl;
+                cout<<c[i].address<<endl;
+                cout<<c[i].city<<", "<<c[i].state<<", "<<c[i].zip<<endl;
+                cout<<c[i].telphne<<endl;
+                cout<<"$"<<c[i].balance<<endl;
+                cout<<c[i].lpyment;
+                cout<<endl;
             }
-            cout<<endl;
         }
-        int *fllAry2(int n){
-            int *a=new int[n];
-            for(int i=0;i<n;i++){
-                a[i]=i*5;
+        account *fill(account c[],int n,int index){
+            cout<<"Please enter: "<<endl;
+            for(int i=index;i<n;i++){
+                cout<<"Name "<<i+1<<": ";
+                getline(cin,c[i].name);
+                cout<<"Address: ";
+                getline(cin,c[i].address);
+                cout<<"City: ";
+                getline(cin,c[i].city);
+                cout<<"State: ";
+                getline(cin,c[i].state);
+                cout<<"Zip Code: ";
+                cin>>c[i].zip;
+                cin.ignore();
+                cout<<"Telephone Number: ";
+                getline(cin,c[i].telphne);
+                cout<<"Account Balance: ";
+                cin>>c[i].balance;
+                cin.ignore();
+                cout<<"Date of Last Payment (Month & Year): ";
+                getline(cin,c[i].lpyment);
             }
-            //Print the Array
-            cout<<"This program displays an array, then expands it by ";
-            cout<<"increase the size by a factor of 2.\n";
-            cout<<"However, it initializes all the unused elements to 0"<<endl;
-            prtAry1(a,n,10);
+            return c;
+        }
+        account *adjust(account c[],int n){
+            int choose;
+            cout<<"Which element (0-9) would you like to change?"<<endl;
+            cin>>choose;
+            cin.ignore();
 
-            return a;
+            fill(c,choose+1,choose);
+
+            return c;
+        }
+        void process(int choice,account c[],int n){
+            switch(choice){
+                case 1: adjust(c,n); break;
+                case 2: disply4(c,n); break;
+                default: return;
+            }
+        }
+        int Menu1(){
+            int choice;
+            //Display Menu
+            cout<<"Now choose what you would like to do with the information you ";
+            cout<<"have input"<<endl;
+            cout<<"1. Change the Data"<<endl;
+            cout<<"2. Display the Data"<<endl;
+            cout<<"3. Absolutely Nothing"<<endl;
+
+            cin>>choice;
+            while(choice<1||choice>3){
+                cout<<"Only select options 1 through 3: ";
+                cin>>choice;
+            }
+
+            return choice;
         }
     void problem8()
     {
         //Function Prototypes
-        int randDgt();
-        int *fllAry3(int);
-        void *sortAry(int *,int);
-        void mean(int *,int);
-        void median(int *,int);
-        void mode(int *,int);
-        //Set the Random Number Seed
-        srand(static_cast<unsigned int>(time(0)));
+        void prcess(int,speaker [],int);
+        speaker *adjust1(speaker [],int);
+        speaker *fill1(speaker [],int,int);
+        void disply5(speaker [],int);
+        //Declare variables, no doubles
+        int SIZE=10;
+        speaker person[SIZE];
+        int choice,index=0;
 
-        //Declare Array & Randomized Size
-        const int SIZE=randDgt();
-        cout<<"Here is an array of size "<<SIZE<<":"<<endl;
-        int *array=fllAry3(SIZE);
-
-        //Display Randomized Array
-        prtAry1(array,SIZE,10);
-        sortAry(array,SIZE);
-
-        //Sort & Display Array
-        cout<<"Sorted Array: \n";
-        prtAry1(array,SIZE,10);
-
-        //Calculate Mean, Median, Mode
-        mean(array,SIZE);
-        median(array,SIZE);
-        mode(array,SIZE);
-
-        //Delete Pointer
-        delete []array;
+        //Input data
+        fill1(person,SIZE,index);
+        //Menu
+        do{
+        choice=Menu1();
+        prcess(choice,person,SIZE);
+        }while(choice!=3);
+        cout<<endl;
     }
-        void mode(int *a,int n){
-            int count=1,nmodes=0;
-            int *b=new int [n];
-
-            for(int i=0;i<n;i++) 
-                *(b+i)=1;
-
-            for(int i=0;i<n-1;i++){
-                for(int j=i+1;j<n;j++){
-                    if (*(a+i)==*(a+j)){
-                        b[i]++;
-                    }
-                if(b[i]>count)
-                    count=*(b+i);
-                }
-            }
-
-            //Modes
-            if(count>1){
-                cout<<"The mode set is { ";
-                for(int j=0;j<n;j++)
-                    if(*(b+j)==count){
-                        cout<<*(a+j)<<" ";
-                        nmodes++;
-                    }
-                cout<<"}"<<endl;
-                cout<<"The frequency of each is: "<<count<<endl;
-                cout<<"The number of modes is: "<<nmodes<<endl;
-            }
-            else
-                cout<<"No Mode!!"<<endl;
-            cout<<endl;
-            //Delete Array
-            delete []b;
-        }
-        void median(int *a,int n){
-            float median;
-            if(n%2==1)
-                median=(a[n/2])/1.0;
-            else if(n%2==0)
-                median=(a[n/2]+a[n/2-1])/2.0;
-            cout<<fixed<<setprecision(1)<<showpoint;
-            cout<<"The median is: "<<median<<endl;
-        }
-        void mean(int *a,int n){
-            int total=0;
-            float average;
+        void disply5(speaker s[],int n){
             for(int i=0;i<n;i++){
-                total+=a[i];
+                cout<<endl;
+                cout<<s[i].name<<endl;
+                cout<<s[i].telphne<<endl;
+                cout<<s[i].topic<<endl;
+                cout<<"$"<<s[i].fee<<endl;
+                cout<<endl;
             }
-            average=total/(n*1.0);
-            cout<<fixed<<setprecision(1)<<showpoint;
-            cout<<"The average is: "<<average<<endl;
         }
-        void *sortAry(int *a,int n){
-            //Declare More Variables
-            int start, minindx, minval;
+        speaker *fill1(speaker s[],int n,int index){
+            cout<<"Please enter: "<<endl;
+            for(int i=index;i<n;i++){
+                cout<<"Speaker Name "<<i+1<<": ";
+                getline(cin,s[i].name);
+                cout<<"Telephone Number: ";
+                getline(cin,s[i].telphne);
+                cout<<"Topic: ";
+                getline(cin,s[i].topic);
+                cout<<"Speaker Fee: ";
+                cin>>s[i].fee;
+                cin.ignore();
+            }
+            return s;
+        }
+        speaker *adjust1(speaker s[],int n){
+            int choose;
+            cout<<"Which element (0-9) would you like to change?"<<endl;
+            cin>>choose;
+            cin.ignore();
 
-            //Sort Values in Array
-            for(start=0;start<n-1;start++){
-                minindx=start;
-                minval=a[start];
-                for(int i=start+1;i<n;i++){
-                    if(a[i]<minval){
-                        minval=a[i];
-                        minindx=i;
-                    }
-                }
-                a[minindx]=a[start];
-                a[start]=minval;
+            fill1(s,choose+1,choose);
+
+            return s;
+        }
+        void prcess(int choice,speaker s[],int n){
+            switch(choice){
+                case 1: adjust1(s,n); break;
+                case 2: disply5(s,n); break;
+                default: return;
             }
-        }
-        int *fllAry3(int n){
-            //Function Prototypes
-            int randDgt();
-            int *a=new int[n];
-            for(int i;i<n;i++)
-                a[i]=randDgt();
-            return a;
-        }
-        int randDgt(){
-            const int MIN=1, MAX=100;
-            return (rand()%(MAX-MIN+1)+MIN);
         }
     void def(int inN)
     {

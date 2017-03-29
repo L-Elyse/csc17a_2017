@@ -37,10 +37,6 @@ int main(int argc, char** argv) {
     process(choice,custmer,SIZE);
     }while(choice!=3);
     
-    //Process data
-    
-    //Output data
-    
     //Exit Stage Right!
     return 0;
 }
