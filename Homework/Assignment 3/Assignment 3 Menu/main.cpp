@@ -75,46 +75,53 @@ void problem8();
     {
         //Function Prototypes
         void display(movie);
+        
         //Declare variables, no doubles
         movie movie1={"Whiplash","Damien Chazelle",2014,107};
         movie movie2={"The Help","Tate Taylor",2011,146};
 
         //Display Information on Movies
+        cout<<"This program displays information about two different ";
+        cout<<"movies."<<endl;
         display(movie1);
         cout<<endl;
         display(movie2);
         cout<<endl;
     }
         void display(movie m){
-        //Print  Movie Information to the Screen
-        cout<<"Movie:         "<<m.title<<endl;
-        cout<<"Director:      "<<m.direct<<endl;
-        cout<<"Year Released: "<<m.year<<endl;
-        cout<<"Running Time:  "<<m.runtime<<" minutes"<<endl;
+            //Print  Movie Information to the Screen
+            cout<<"Movie:         "<<m.title<<endl;
+            cout<<"Director:      "<<m.direct<<endl;
+            cout<<"Year Released: "<<m.year<<endl;
+            cout<<"Running Time:  "<<m.runtime<<" minutes"<<endl;
         }
     void problem2()
     {
         //Function Prototypes
         void disply1(modify);
+        
         //Declare variables, no doubles
         modify movie1={"Whiplash","Damien Chazelle",2014,107,3300000,33000000};
         modify movie2={"The Help","Tate Taylor",2011,146,25000000,213000000};
 
         //Display Information on Movies
+        cout<<"This program is similar to Problem 1, except that this ";
+        cout<<"program displays Production Costs and Revenue of both ";
+        cout<<"movies"<<endl;
         disply1(movie1);
         cout<<endl;
         disply1(movie2);
         cout<<endl;
     }
         void disply1(modify m){
-        //Print  Movie Information to the Screen
-        cout<<"Movie:            "<<m.title<<endl;
-        cout<<"Director:         "<<m.direct<<endl;
-        cout<<"Year Released:    "<<m.year<<endl;
-        cout<<"Running Time:     "<<m.runtime<<" minutes"<<endl;
-        cout<<fixed<<setprecision(2)<<showpoint;
-        cout<<"Production Cost:  $"<<setw(12)<<m.product<<endl;
-        cout<<"Revenue:          $"<<setw(12)<<m.revenue<<endl;
+            //Print  Movie Information to the Screen
+            cout<<"Movie:            "<<m.title<<endl;
+            cout<<"Director:         "<<m.direct<<endl;
+            cout<<"Year Released:    "<<m.year<<endl;
+            cout<<"Running Time:     "<<m.runtime<<" minutes"<<endl;
+            cout<<fixed<<setprecision(2)<<showpoint;
+            cout<<"Production Cost:  $"<<setw(12)<<m.product<<endl;
+            cout<<"Revenue:          $"<<setw(12)<<m.revenue<<endl;
         }
     void problem3()
     {
@@ -123,12 +130,14 @@ void problem8();
         void second(Sales);
         void third(Sales);
         void fourth(Sales);
+        
         //Declare variables, no doubles
         Sales dvsion1={"East"}, dvsion2={"West"}, dvsion3={"North"}, 
             dvsion4={"South"};
     
         //Get the Information for each division
-        cout<<"This program stores data about a company's divisions"<<endl;
+        cout<<"This program stores and displays sales information about a ";
+        cout<<"company's North, South, East, and West divisions."<<endl;
         first(dvsion1);
         second(dvsion2);
         third(dvsion3);
@@ -235,13 +244,15 @@ void problem8();
         //Function Prototypes
         void highest(weather [],int);
         void lowest(weather [],int);
+        
         //Declare variables, no doubles
         const int SIZE=12;
         weather array[SIZE];
         float totalr=0,avrgr,avgtemp=0;
 
         //Input data
-        cout<<"This program computes weather statistics for the year. \n";
+        cout<<"This program computes weather statistics for each month of ";
+        cout<<"the year. \n";
         for(int i=0;i<SIZE;i++){
             cout<<"Please enter the following for Month: "<<i+1<<endl;
             cout<<"Total Rainfall: ";
@@ -249,15 +260,15 @@ void problem8();
             cout<<"High Temperature: ";
             cin>>array[i].high;
             while((array[i].high)<-100||(array[i].high)>140){
-                cout<<"Sorry. Only values between -100 and 140 degrees Fahrenheit ";
-                cout<<"are allowed."<<endl;
+                cout<<"Sorry. Only values between -100 and 140 degrees ";
+                cout<<"Fahrenheit are allowed."<<endl;
                 cin>>array[i].high;
             }
             cout<<"Low Temperature: ";
             cin>>array[i].low;
             while((array[i].low)<-100||(array[i].low)>140){
-                cout<<"Sorry. Only values between -100 and 140 degrees Fahrenheit ";
-                cout<<"are allowed."<<endl;
+                cout<<"Sorry. Only values between -100 and 140 degrees ";
+                cout<<"Fahrenheit are allowed."<<endl;
                 cin>>array[i].low;
             }
             //Calculate Averages
@@ -271,6 +282,7 @@ void problem8();
         avgtemp/=12;
 
         //Output data
+        cout<<endl;
         cout<<"Here are the results: "<<endl;
         highest(array,SIZE);
         lowest(array,SIZE);
@@ -316,13 +328,16 @@ void problem8();
     {
         //Function Prototypes
         void disply2(Months);
+        
         //Declare variables, no doubles
         const int SIZE=12;
         weather array[SIZE];
         float totalr=0,avrgr,avgtemp=0;
 
         //Input data
-        cout<<"This program computes weather statistics for the year. \n";
+        cout<<"This program is similar to Problem 4 however, this one ";
+        cout<<"computes weather statistics each month of the year \n";
+        cout<<"by using enumerated data types to display the actual months \n";
         for(Months i=JANUARY;i<SIZE;i=static_cast<Months>(i+1)){
             cout<<"Please enter the following for ";
             disply2(i);
@@ -332,15 +347,15 @@ void problem8();
             cout<<"High Temperature: ";
             cin>>array[i].high;
             while((array[i].high)<-100||(array[i].high)>140){
-                cout<<"Sorry. Only values between -100 and 140 degrees Fahrenheit ";
-                cout<<"are allowed."<<endl;
+                cout<<"Sorry. Only values between -100 and 140 degrees ";
+                cout<<"Fahrenheit are allowed."<<endl;
                 cin>>array[i].high;
             }
             cout<<"Low Temperature: ";
             cin>>array[i].low;
             while((array[i].low)<-100||(array[i].low)>140){
-                cout<<"Sorry. Only values between -100 and 140 degrees Fahrenheit ";
-                cout<<"are allowed."<<endl;
+                cout<<"Sorry. Only values between -100 and 140 degrees ";
+                cout<<"Fahrenheit are allowed."<<endl;
                 cin>>array[i].low;
             }
             //Calculate Averages
@@ -385,14 +400,19 @@ void problem8();
         void disply3(scores [],int);
         void teampts(scores [],int);
         void highscr(scores [],int);
+        
         //Declare variables, no doubles
         int SIZE=12;
         scores points[SIZE];
         int total;
 
-        //Input data
+        //Input & Display the Data
+        cout<<"This program receives data on soccer scores and determines the ";
+        cout<<"overall team score and highest scorer on the team. "<<endl;
         fillAry(points,SIZE);
         disply3(points,SIZE);
+        
+        //Calculate Total Team Points and Highest Scorer
         teampts(points,SIZE);
         highscr(points,SIZE);
         cout<<endl;
@@ -463,13 +483,19 @@ void problem8();
         account *adjust(account [],int);
         account *fill(account [],int,int);
         void disply4(account [],int);
+        
         //Declare variables, no doubles
         int SIZE=10;
         account custmer[SIZE];
         int choice,index=0;
 
-        //Input data
+        //Input the Data
+        cout<<"This program accepts information on customer accounts, then ";
+        cout<<"allows the user to choose to display the information, \n";
+        cout<<"or change the information of any account."<<endl;
         fill(custmer,SIZE,index);
+        
+        //Display the Menu Options
         do{
         choice=Menu1();
         process(choice,custmer,SIZE);
@@ -532,8 +558,8 @@ void problem8();
         int Menu1(){
             int choice;
             //Display Menu
-            cout<<"Now choose what you would like to do with the information you ";
-            cout<<"have input"<<endl;
+            cout<<"Now choose what you would like to do with the information ";
+            cout<<"you have input"<<endl;
             cout<<"1. Change the Data"<<endl;
             cout<<"2. Display the Data"<<endl;
             cout<<"3. Absolutely Nothing"<<endl;
@@ -553,13 +579,18 @@ void problem8();
         speaker *adjust1(speaker [],int);
         speaker *fill1(speaker [],int,int);
         void disply5(speaker [],int);
+        
         //Declare variables, no doubles
         int SIZE=10;
         speaker person[SIZE];
         int choice,index=0;
 
-        //Input data
+        //Input the Data
+        cout<<"This program keeps track of a speakers' bureau. The user can ";
+        cout<<"enter the information, then choose to display or change \n";
+        cout<<"any of the information of the speakers' information."<<endl;
         fill1(person,SIZE,index);
+        
         //Menu
         do{
         choice=Menu1();
