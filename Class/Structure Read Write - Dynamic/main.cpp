@@ -11,7 +11,6 @@
 #include <ctime>
 #include <cstdlib>
 #include <fstream>
-#include <valarray>
 using namespace std;
 
 //User Libraries
