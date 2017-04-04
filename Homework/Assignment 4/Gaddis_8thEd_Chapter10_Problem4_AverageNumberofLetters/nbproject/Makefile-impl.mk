@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Gaddis_8thEd_Chapter10_Problem3_WordCounter
+PROJECTNAME=Gaddis_8thEd_Chapter10_Problem4_AverageNumberofLetters
 
 # Active Configuration
 DEFAULTCONF=Debug
