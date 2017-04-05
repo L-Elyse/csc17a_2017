@@ -22,9 +22,12 @@ int main(int argc, char** argv) {
     //Declare variables, no doubles
     fstream file;
     string name,line;
+    int count=0;
+    char pause;
     
     //Input data
-    cout<<"Enter data.txt to see the first 10 lines of the file."<<endl;
+    cout<<"Select data.txt, data2.txt, or data3.txt to see the file ";
+    cout<<"contents"<<endl;
     getline(cin,name);
     
     //Process data
@@ -32,9 +35,16 @@ int main(int argc, char** argv) {
 
     if(file){
         getline(file, line);
-        for(int i=0;i<10;i++){
+        while(file){
+            count++;
             cout<<line;
-            getline(file, line);
+            if(count%24!=0)
+                getline(file, line);
+            else{
+                cout<<"Enter any character to see more lines"<<endl;
+                cin>>pause;
+                getline(file, line);
+            }
         }
         file.close();
     }

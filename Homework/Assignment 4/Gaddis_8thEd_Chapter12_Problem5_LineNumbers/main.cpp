@@ -1,8 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on April 4, 2017, 9:50 PM
- * Purpose: File Head Program
+ * Created on April 5, 2017, 12:50 AM
+ * Purpose: Line Numbers Program
  */
 
 //System Libraries
@@ -22,9 +22,12 @@ int main(int argc, char** argv) {
     //Declare variables, no doubles
     fstream file;
     string name,line;
+    int count=0;
+    char pause;
     
     //Input data
-    cout<<"Enter data.txt to see the first 10 lines of the file."<<endl;
+    cout<<"Select data.txt, data2.txt, or data3.txt to see the file ";
+    cout<<"contents"<<endl;
     getline(cin,name);
     
     //Process data
@@ -32,9 +35,16 @@ int main(int argc, char** argv) {
 
     if(file){
         getline(file, line);
-        for(int i=0;i<10;i++){
-            cout<<line;
-            getline(file, line);
+        while(file){
+            count++;
+            cout<<count<<":"<<line;
+            if(count%24!=0)
+                getline(file, line);
+            else{
+                cout<<"Enter any character to see more lines"<<endl;
+                cin>>pause;
+                getline(file, line);
+            }
         }
         file.close();
     }
