@@ -70,15 +70,17 @@ void problem10();
         //Function Prototypes
         int length(char *);
         //Declare variables, no doubles
-        char *input;
+        int size=100;
+        char input[size];
     
         //Get the String from User
         cout<<"Enter a string and I will tell you how long it is"<<endl;
-        cin.getline(input,100);
+        cin.getline(input,size);
 
         //Output the String Length
         cout<<endl;
         cout<<"This string is "<<length(input)<<" characters long."<<endl;
+        cout<<endl;
     }
         int length(char *str){
             int length=strlen(str);
@@ -89,39 +91,44 @@ void problem10();
         //Function Prototypes
         void revrse(char *,int);
         //Declare variables, no doubles
-        char *input;
+        int size=100;
+        char input[size];
         int length;
 
         //Input data
         cout<<"Enter a string and I will output it in reverse!"<<endl;
-        cin.getline(input,100);
+        cin.getline(input,size);
 
         //Determine Length and Output Results
         length=strlen(input);
         revrse(input,length);
+        cout<<endl;
     }
         void revrse(char *c,int n){
             cout<<"The reversed string is: "<<endl;
             for(int i=n-1;i>=0;i--){
                 cout<<*(c+i);
             }
+            cout<<endl;
         }
     void problem3()
     {
         //Function Prototypes
         int counter(char *,int);
         //Declare variables, no doubles
-        char *input;
+        int size=100;
+        char input[size];
         int length;
 
         //Get the String from User
         cout<<"Enter a string and I will count the words"<<endl;
-        cin.getline(input,100);
+        cin.getline(input,size);
         length=strlen(input);
 
         //Output the String Length
         cout<<endl;
         cout<<"This string has "<<counter(input,length)<<" words."<<endl;
+        cout<<endl;
     }
         int counter(char *str,int l){
             int count=0;
@@ -136,18 +143,21 @@ void problem10();
         //Function Prototypes
         float average(char *,int);
         //Declare variables, no doubles
-        char *input;
+        int size=100;
+        char input[size];
         int length;
 
         //Get the String from User
-        cout<<"Enter a string and I tell you the average number of letters ";
+        cout<<"Enter a string and I'll tell you the average number of letters ";
         cout<<"in each word."<<endl;
-        cin.getline(input,100);
+        cin.getline(input,size);
         length=strlen(input);
 
         //Output the String Length
         cout<<endl;
-        cout<<"This string has an average of "<<average(input,length)<<" words.\n";
+        cout<<"This string has an average of "<<average(input,length);
+        cout<<" words.\n";
+        cout<<endl;
     }
         float average(char *str,int l){
             //Declare Accumulators & Allocate Dynamic Memory
@@ -184,18 +194,22 @@ void problem10();
         //Function Prototypes
         void capital(char *,int);
         //Declare variables, no doubles
-        char *input;
+        int size=200;
+        char input[size];
         int length;
 
         //Input data
-        cout<<"Enter a couple sentences with proper punctuation. Do NOT capitalize";
-        cout<<" the first word of each sentence though."<<endl;
+        cout<<"Enter a couple sentences with proper punctuation. Do NOT ";
+        cout<<" capitalize the first word of each sentence though."<<endl;
         cout<<"I will do that for you."<<endl;
-        cin.getline(input,200);
+        cin.getline(input,size);
 
         //Get the Length of the string and output
         length=strlen(input);
+        cout<<endl;
+        cout<<"Results: ";
         capital(input,length);
+        cout<<endl;
     }
         void capital(char *c,int n){
             *(c+0)=toupper(*(c+0));
@@ -207,6 +221,7 @@ void problem10();
             }
             for(int i=0;i<n;i++)
                 cout<<*(c+i);
+            cout<<endl;
         }
     void problem6()
     {
@@ -215,16 +230,18 @@ void problem10();
         void lower(char *);
         void reverse(char *);
         //Declare variables, no doubles
-        char *input;
+        int size=100;
+        char input[size];
 
         //Get the String from User
         cout<<"Enter a string and I will manipulate all the cases."<<endl;
-        cin.getline(input,100);
+        cin.getline(input,size);
 
         //Output the String Manipulated
         upper(input);
         lower(input);
         reverse(input);
+        cout<<endl;
     }
         void reverse(char *c){
             cout<<endl;
@@ -237,6 +254,7 @@ void problem10();
                 else
                     cout<<*(c+i);
             }
+            cout<<endl;
         }
         void lower(char *c){
             cout<<endl;
@@ -257,7 +275,8 @@ void problem10();
 	//Function Prototypes
         void verify(char *,int);
         //Declare variables, no doubles
-        char *passwrd;
+        int size=50;
+        char passwrd[size];
         int length;
 
         //Input data
@@ -267,11 +286,12 @@ void problem10();
         cout<<"One uppercase"<<endl;
         cout<<"One lowercase"<<endl;
         cout<<"One digit"<<endl;
-        cin.getline(passwrd,50);
+        cin.getline(passwrd,size);
 
         //Process data
         length=strlen(passwrd);
         verify(passwrd,length);
+        cout<<endl;
     }
         void verify(char *c,int l){
             //Declare Variables
@@ -281,8 +301,9 @@ void problem10();
             cout<<"Results: "<<endl;
             //Check Length
             if(l<6){
-                cout<<"I'm sorry. Your password must be at least six characters. Your ";
-                cout<<"password only contains "<<l<<" characters."<<endl;
+                cout<<"I'm sorry. Your password must be at least six ";
+                cout<<"characters. Your password only contains "<<l;
+                cout<<" characters."<<endl;
             }
             else if(l>=6){
                 //Search for Uppercase, Lowercase, and Digit
@@ -323,13 +344,14 @@ void problem10();
         if(file){
             getline(file, line);
             for(int i=0;i<10;i++){
-                cout<<line;
+                cout<<line<<endl;
                 getline(file, line);
             }
             file.close();
         }
         else
             cout<<"Error. Cannot open file"<<endl;
+        cout<<endl;
     }
     void problem9()
     {
@@ -351,7 +373,7 @@ void problem10();
             getline(file, line);
             while(file){
                 count++;
-                cout<<line;
+                cout<<line<<endl;
                 if(count%24!=0)
                     getline(file, line);
                 else{
@@ -364,6 +386,7 @@ void problem10();
         }
         else
             cout<<"Error. Cannot open file"<<endl;
+        cout<<endl;
     }
     void problem10()
     {
@@ -385,7 +408,7 @@ void problem10();
             getline(file, line);
             while(file){
                 count++;
-                cout<<count<<":"<<line;
+                cout<<count<<":"<<line<<endl;
                 if(count%24!=0)
                     getline(file, line);
                 else{
@@ -398,6 +421,7 @@ void problem10();
         }
         else
             cout<<"Error. Cannot open file"<<endl;
+        cout<<endl;
     }
     void def(int inN)
     {
