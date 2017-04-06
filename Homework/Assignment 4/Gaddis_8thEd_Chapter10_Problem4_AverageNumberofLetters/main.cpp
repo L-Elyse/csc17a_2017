@@ -16,7 +16,7 @@ using namespace std;
 //Global Constants
 
 //Function Prototypes
-float counter(char *,int);
+float average(char *,int);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -32,13 +32,13 @@ int main(int argc, char** argv) {
     
     //Output the String Length
     cout<<endl;
-    cout<<"This string has an average of "<<counter(input,length)<<" words.\n";
+    cout<<"This string has an average of "<<average(input,length)<<" words.\n";
     
     //Exit Stage Right!
     return 0;
 }
 
-float counter(char *str,int l){
+float average(char *str,int l){
     //Declare Accumulators & Allocate Dynamic Memory
     int count=0, index=0, size=0;
     float sum=0.0;

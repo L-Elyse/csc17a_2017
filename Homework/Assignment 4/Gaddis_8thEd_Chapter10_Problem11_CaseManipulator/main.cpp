@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     cout<<"Enter a string and I will manipulate all the cases."<<endl;
     cin.getline(input,100);
     
-    //Output the String Length
+    //Output the String Manipulated
     upper(input);
     lower(input);
     reverse(input);
