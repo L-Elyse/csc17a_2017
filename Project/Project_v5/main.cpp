@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on April 11, 2017, 11:50 AM
+ * Created on April 11, 2017, 12:45 PM
  * Purpose: War Card Game
  */
 
@@ -29,6 +29,9 @@ unsigned int menu(unsigned int &);
 char pckCard(unsigned int);
 int cardVal(unsigned int);
 int getRand();
+void eval(player,player);
+void win();
+void loss();
 
 //Execution Begins Here!
 int main(int argc, char** argv){
@@ -38,10 +41,10 @@ int main(int argc, char** argv){
     //Declare Variables
     unsigned short warcnt;
     unsigned int choice;    //The menu option that user chooses
-    player comp,user;
-    int nwins=0,nlosses=0,nwars=0;
+    player comp={0,0,0,0,0};
+    player user={0,0,0,0,0};
         
-    //DON'T FORGET TO ENTER USER NAME AND DISPLAY MESSAGE
+    //DON'T FORGET TO ENTER USER NAME AND DISPLAY MESSAGE IN INTRO
     //Get Name of Opponent & Establish Number of "Faced Down" Cards
     comp.name=intro();
     facdDwn(warcnt);
@@ -51,20 +54,44 @@ int main(int argc, char** argv){
         if(choice!=3){
             user.card=cardVal(choice);
             comp.card=getRand();
-            if(user.card>comp.card){
-                nwins++;
-            }
-            else if(user.card<comp.card){
-                nlosses++;
-            }
-            else{
-                nwars++;                
-            }
+            eval(user,comp);
         }    
     }while(choice!=3);
     
     //Exit Stage Right
     return 0;
+}
+
+void loss(){
+    cout<<"Sorry. You lost."<<endl;
+}
+
+//Input User Name?
+void win(){
+    cout<<"You won!!"<<endl;
+}
+
+void eval(player u,player c){
+    
+    if(u.card>c.card){
+        u.wins++;
+        u.score=u.score+u.card+c.card;
+        c.score-=c.card;
+        win();
+        cout<<c.name<<"'s card: "<<c.card<<endl;
+    }
+    else if(u.card<c.card){
+        u.losses++;
+        u.score-=u.card;
+        c.score=c.score+c.card+u.card;
+        loss();
+        cout<<c.name<<"'s card: "<<c.card<<endl;
+    }
+    else{
+        u.wars++;                
+    }
+    cout<<u.wins<<" "<<u.losses<<endl;
+    cout<<u.score<<" "<<c.score<<endl;
 }
 
 int getRand(){

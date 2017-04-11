@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on April 11, 2017, 11:50 AM
+ * Created on April 11, 2017, 12:45 PM
  * Purpose: War Card Game
  */
 
@@ -9,10 +9,11 @@
 #define PLAYER_H
 
 struct player{
-    string name;
-    int card;
     int score;
     int wscore;
+    int wins, losses, wars;
+    string name;
+    int card;
 };
 
 #endif /* PLAYER_H */
