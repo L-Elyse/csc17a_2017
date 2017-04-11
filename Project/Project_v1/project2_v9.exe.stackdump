@@ -1,9 +1,0 @@
-Exception: STATUS_ACCESS_VIOLATION at eip=6F049405
-eax=0062C9B8 ebx=0062CA50 ecx=0000003A edx=0000008C esi=0062C9B8 edi=611E7F32
-ebp=0062CBE8 esp=0062C970 program=C:\Users\User\Desktop\csc5_2016\Project\Project 2\Project2_v9\dist\Debug\Cygwin-Windows\project2_v9.exe, pid 15544, thread main
-cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
-Stack trace:
-Frame     Function  Args
-0062CBE8  6F049405 (20041508, 611E7F32, 0062CD18, 61007D9A)
-0062CD18  61007D9A (00000000, 0062CD74, 61006DC0, 00000000)
-End of stack trace
