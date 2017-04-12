@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on April 11, 2017, 12:45 PM
+ * Created on April 12, 2017, 12:00 PM
  * Purpose: War Card Game
  */
 
@@ -25,14 +25,20 @@ using namespace std;
 //Function Prototypes
 string intro();
 unsigned short facdDwn(unsigned short &);
+const int getSize();
 unsigned int menu(unsigned int &);
 char pckCard(unsigned int);
 int cardVal(unsigned int);
 int getRand();
-void eval(player,player,int &,int &);
-int score();
+void eval(player,player,int &,int &,int &,int);
+int score(const int);
 int win(int &);
 int loss(int &);
+int war(int &,int,player,player,int &,int &);
+int warArry(int *,int);
+int sumArry(int *,int);
+int warCard();
+void destroy(int *,int *);
 
 //Execution Begins Here!
 int main(int argc, char** argv){
@@ -49,6 +55,8 @@ int main(int argc, char** argv){
     //DON'T FORGET TO ENTER USER NAME AND DISPLAY MESSAGE IN INTRO
     //Get Name of Opponent & Establish Number of "Faced Down" Cards
     comp.name=intro();
+//    const int SIZE=getSize();
+//    int score[SIZE];
     facdDwn(warcnt);
     
     do{
@@ -56,12 +64,125 @@ int main(int argc, char** argv){
         if(choice!=3){
             user.card=cardVal(choice);
             comp.card=getRand();
-            eval(user,comp,wins,losses);
+            eval(user,comp,wins,losses,wars,warcnt);
         }    
     }while(choice!=3);
     
     //Exit Stage Right
     return 0;
+}
+
+//int score(const int size,player u){
+//    int *array=new int[size];
+//    int count=0;
+//    array[count]=u.score;
+//    count++;
+//}
+
+int warCard(){
+    int number;
+    cout<<"Now enter your war card"<<endl;
+    cin>>number;
+    
+    //Input Validation    
+    while(!(number)||number<2||number>14){ 
+        cin.clear();
+        cin.ignore();          
+        cout<<"Invalid input. Please type in an integer";
+        cout<<" between 2 and 14."<<endl;
+        cin>>number;
+    }
+    return number;    
+}
+
+int sumArry(int *a,int n){
+    int sum=0;
+    for(int i=0;i<n;i++){
+        sum+=*(a+i);
+    }
+    return sum;
+}
+
+int cwrArry(int *b,int n){
+    for(int i=0;i<n;i++){
+        *(b+i)=getRand();
+    }
+    int cnumber=sumArry(b,n);
+    return cnumber;
+}
+
+int warArry(int *a,int n){
+    cout<<"War!!!"<<endl;
+    cout<<"Please enter the integer value of the card you ";
+    cout<<"would like to draw."<<endl;
+    cout<<"Number cards are simply their own value, while T = 10,"
+            " J = 11, Q = 12, K = 13, A = 14"<<endl;
+    
+    for(int i=0;i<n;i++){
+        cout<<"Enter card "<<i+1<<": ";
+        cin>>*(a+i);
+        
+        //Validate
+        while(!(*(a+i))||*(a+i)<2||*(a+i)>14){
+            cin.clear();
+            cin.ignore();
+            cout<<"Invalid input. Please type in an integer between 2 and 14.";
+            cin>>*(a+i);
+        }
+    }
+    int total=sumArry(a,n);
+    return total;
+}
+
+int war(int &wars,int count,player u,player c,int &won,int &lost){
+    wars++;
+    int warnum,cwarnum;
+    //Declare War Array
+    const int SIZE=count;
+    int urray[SIZE];
+    int crray[SIZE];
+    
+    u.wscore=warArry(urray,SIZE);
+    warnum=warCard();
+    c.wscore=cwrArry(crray,SIZE);
+    cwarnum=getRand();
+    
+    if(warnum>cwarnum){
+        win(won);
+        u.score=u.card+c.card+u.wscore+c.wscore+warnum+cwarnum;
+        c.score=c.score-c.card-c.wscore-cwarnum;
+    }
+    else if(warnum<cwarnum){
+        loss(lost);
+        u.score=u.score-u.card-u.wscore-warnum;
+        c.score=c.card+u.card+c.wscore+u.wscore+cwarnum+warnum;
+    }
+    else{
+        while(warnum==cwarnum){
+            wars++;
+            int warnum,cwarnum;
+            //Declare War Array
+            const int SIZE=count;
+            int urray[SIZE];
+            int crray[SIZE];
+
+            u.wscore=warArry(urray,SIZE);
+            warnum=warCard();
+            c.wscore=cwrArry(crray,SIZE);
+            cwarnum=getRand();
+
+            if(warnum>cwarnum){
+                win(won);
+                u.score=u.card+c.card+u.wscore+c.wscore+warnum+cwarnum;
+                c.score=c.score-c.card-c.wscore-cwarnum;
+            }
+            else if(warnum<cwarnum){
+                loss(lost);
+                u.score=u.score-u.card-u.wscore-warnum;
+                c.score=c.card+u.card+c.wscore+u.wscore+cwarnum+warnum;
+            }
+        }
+    }
 }
 
 int loss(int &loss){
@@ -77,22 +198,22 @@ int win(int &win){
     return win;
 }
 
-void eval(player u,player c,int &won,int &lost){
+void eval(player u,player c,int &won,int &lost,int &wars,int wcount){
     if(u.card>c.card){
-        win(won);        
-        u.score=u.score+u.card+c.card;
+        win(won);
+        u.score=u.card+c.card;
         c.score-=c.card;
         cout<<c.name<<"'s card: "<<c.card<<endl;
     }
     else if(u.card<c.card){
         loss(lost);
         u.score-=u.card;
-        c.score=c.score+c.card+u.card;
+        c.score=c.card+u.card;
         cout<<c.name<<"'s card: "<<c.card<<endl;
     }
-    else{               
+    else{
+       war(wars,wcount,u,c,won,lost); 
     }
-    cout<<won<<" "<<lost<<endl;
 }
 
 int getRand(){
@@ -169,6 +290,16 @@ unsigned int menu(unsigned int &option){
     
     return option;
 }
+
+//const int getSize(){
+//    //Get size of score array
+//    const int SIZE;
+//    cout<<endl;
+//    cout<<"How many hands would you like to play?"<<endl;
+//    cin>>SIZE;
+//    
+//    return SIZE;
+//}
 
 unsigned short facdDwn(unsigned short &number){
     cout<<endl;
