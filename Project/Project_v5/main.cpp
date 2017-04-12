@@ -15,7 +15,7 @@
 #include <cmath>    //Math Library
 #include <cctype>
 #include <cstring>  
-using namespace std;
+using namespace std; 
 
 //User Libraries
 #include "Player.h"
