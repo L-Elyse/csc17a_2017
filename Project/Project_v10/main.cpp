@@ -44,7 +44,7 @@ void prntAry(player,const int);
 void prntBry(player,const int);
 void destroy(player,player);
 void readldr();
-void finstat(player,player,int,int,const int);
+void finstat(player,player,int,int,int,const int);
 void DayName(Day);
 
 //Execution Begins Here!
@@ -80,7 +80,7 @@ int main(int argc, char** argv){
         }while(count<SIZE);
         
         //Finishing Stats
-        finstat(user,comp,wins,losses,SIZE);  //Output to File
+        finstat(user,comp,wins,losses,wars,SIZE);  //Output to File
         stats(user,comp,SIZE);                //Output to Screen
         
         cout<<"Would you like to play more hands?"<<endl;
@@ -98,7 +98,7 @@ int main(int argc, char** argv){
     return 0;
 }
 
-void finstat(player u,player c,int win,int lose,const int SIZE){
+void finstat(player u,player c,int win,int lose,int war,const int SIZE){
     //Declare Variables
     int ngames;
     float pwins,plosses;
@@ -113,6 +113,7 @@ void finstat(player u,player c,int win,int lose,const int SIZE){
     finish<<"Opponent: "<<c.name<<endl;
     finish<<"Wins:     "<<setw(4)<<win<<endl;
     finish<<"Losses:   "<<setw(4)<<lose<<endl;
+    finish<<"Wars:     "<<setw(4)<<war<<endl;
     finish<<endl;
     
     //Calculate Total Scores
