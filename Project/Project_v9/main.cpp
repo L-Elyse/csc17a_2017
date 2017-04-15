@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on April 14, 2017, 8:45 PM
+ * Created on April 14, 2017, 10:30 PM
  * Purpose: War Card Game
  */
 
@@ -44,7 +44,7 @@ void prntAry(player,const int);
 void prntBry(player,const int);
 void destroy(player,player);
 void readldr();
-void prntldr();
+void finstat(player,player,int,int,const int);
 void DayName(Day);
 
 //Execution Begins Here!
@@ -79,7 +79,10 @@ int main(int argc, char** argv){
             count++;
         }while(count<SIZE);
         
+        //Finishing Stats - Output to a File
+        finstat(user,comp,wins,losses,SIZE);
         stats(user,comp,SIZE);
+        
         cout<<"Would you like to play more hands?"<<endl;
         cout<<"Press 1 for yes or 0 for no."<<endl;
         cin>>again;
@@ -90,16 +93,58 @@ int main(int argc, char** argv){
     
     //Show Leaderboard
     readldr();
-    
-    //Finishing Stats - Output to a File
-    prntldr();
-    
+        
     //Exit Stage Right
     return 0;
 }
 
-void prntldr(int **,int){
+void finstat(player u,player c,int win,int lose,const int SIZE){
+    //Declare Variables
+    int ngames;
+    float pwins,plosses;
+    int utotal=0,ctotal=0;
+    string winner;
+    fstream finish;
     
+    //Open & Write to file
+    finish.open("stats.dat",ios::out);
+    finish<<"Here are your Game Stats:"<<endl<<endl;
+    finish<<"Name: "<<u.name<<endl;
+    finish<<"Opponent: "<<c.name<<endl;
+    finish<<"Wins:     "<<setw(4)<<win<<endl;
+    finish<<"Losses:   "<<setw(4)<<lose<<endl;
+    finish<<endl;
+    
+    //Calculate Total Scores
+    for(int i=0;i<SIZE;i++)
+        utotal+=u.score[i];
+    finish<<"Your final score: "<<setw(4)<<utotal<<endl;
+    for(int i=0;i<SIZE;i++)
+        ctotal+=c.score[i];
+    finish<<c.name<<"'s final score: "<<setw(4)<<ctotal<<endl;
+    finish<<"Point difference:  "<<setw(4)<<abs(utotal-ctotal)<<endl;
+    
+    //Determine Winner of Game
+    if(utotal>ctotal)
+        winner=u.name;
+    else
+        winner=c.name;
+    finish<<"Winner:  "<<winner<<endl;
+    
+    //Calculate Number of Games
+    ngames=win+lose;
+    finish<<"Total games played: "<<ngames<<endl;
+    
+    pwins=static_cast<float>(win)/ngames;
+    plosses=static_cast<float>(lose)/ngames;
+    
+    //Output Percentage
+    finish<<fixed<<setprecision(1)<<showpoint;
+    finish<<"You won "<<pwins*100<<"% of the hands you played"<<endl;
+    finish<<"You lost "<<plosses*100<<"% of the hands you played"<<endl;
+    
+    //Close file
+    finish.close();
 }
 
 void DayName(Day d){
