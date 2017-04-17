@@ -24,8 +24,8 @@ using namespace std;
 enum Day {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY};
 
 //Function Prototypes
-string intro();
-string oppname();
+player intro(player);
+player oppname(player);
 unsigned short facdDwn(unsigned short &);
 const int getSize();
 unsigned int menu(unsigned int &);
@@ -55,13 +55,14 @@ int main(int argc, char** argv){
     //Declare Variables
     unsigned short warcnt;
     unsigned int choice;    //The menu option that user chooses
-    player comp;
-    player user;
+    player user,comp;
     bool again;
         
     //Get Name of Opponent & Establish Number of "Faced Down" Cards
-    user.name=intro();
-    comp.name=oppname();
+    user.name=new char[100];
+    comp.name=new char[100];
+    intro(user);
+    oppname(comp);
     facdDwn(warcnt);
     
     do{
@@ -81,18 +82,19 @@ int main(int argc, char** argv){
         
         //Finishing Stats
         finstat(user,comp,wins,losses,wars,SIZE);  //Output to File
-        stats(user,comp,SIZE);                //Output to Screen
-        
+        stats(user,comp,SIZE);                     //Output to Screen   
         cout<<"Would you like to play more hands?"<<endl;
         cout<<"Press 1 for yes or 0 for no."<<endl;
         cin>>again;
     }while(again==true);
     
-    //End Game
+    //End Game & Show Leaderboard
     cout<<"Thank you for playing!"<<endl<<endl;
-    
-    //Show Leaderboard
     readldr();
+    
+    //Prevent Memory Leak
+    delete []user.name;
+    delete []comp.name;
         
     //Exit Stage Right
     return 0;
@@ -109,9 +111,13 @@ void finstat(player u,player c,int win,int lose,int war,const int SIZE){
     //Open & Write to file
     finish.open("stats.dat",ios::app);
     finish<<"Here are your Game Stats:"<<endl<<endl;
-    finish<<"Name: "<<u.name<<endl;
-    finish<<"Opponent: "<<c.name<<endl;
-    finish<<"Wins:     "<<setw(4)<<win<<endl;
+    finish<<"Name: ";
+    for(int i=0;i<strlen(u.name);i++)
+        finish<<static_cast<char>(toupper(*(u.name+i)));
+    finish<<endl<<"Opponent: ";
+    for(int i=0;i<strlen(c.name);i++)
+        finish<<static_cast<char>(toupper(*(c.name+i)));
+    finish<<endl<<"Wins:     "<<setw(4)<<win<<endl;
     finish<<"Losses:   "<<setw(4)<<lose<<endl;
     finish<<"Wars:     "<<setw(4)<<war<<endl;
     finish<<endl;
@@ -124,22 +130,19 @@ void finstat(player u,player c,int win,int lose,int war,const int SIZE){
         ctotal+=c.score[i];
     finish<<c.name<<"'s final score: "<<setw(4)<<ctotal<<endl;
     finish<<"Point difference:  "<<setw(4)<<abs(utotal-ctotal)<<endl;
-    
+   
     //Determine Winner of Game
-    if(utotal>ctotal)
-        winner=u.name;
-    else
-        winner=c.name;
+    if(utotal>ctotal) winner=u.name;
+    else winner=c.name;
     finish<<"Winner:  "<<winner<<endl;
-    
+   
     //Calculate Number of Games
     ngames=win+lose;
     finish<<"Total games played: "<<ngames<<endl;
-    
+   
+    //Calculate & Output Percentage of Wins & Losses
     pwins=static_cast<float>(win)/ngames;
     plosses=static_cast<float>(lose)/ngames;
-    
-    //Output Percentage
     finish<<fixed<<setprecision(1)<<showpoint;
     finish<<"You won "<<pwins*100<<"% of the hands you played"<<endl;
     finish<<"You lost "<<plosses*100<<"% of the hands you played"<<endl;
@@ -210,6 +213,18 @@ void stats(player u,player c,int size){
     cout<<c.name<<"'s score: [ ";
     prntBry(c,size);
     cout<<"]"<<endl;
+    
+    //Output to Binary File
+    fstream binFile;
+    
+    binFile.open("binFile.bin",ios::binary|ios::app);
+    binFile.write(u.name,strlen(u.name));
+    binFile.write(reinterpret_cast<char *>(u.score),size);
+    binFile.write(c.name,strlen(c.name));
+    binFile.write(reinterpret_cast<char *>(c.score),size);
+    
+    //Close Binary File
+    binFile.close();
     
     //Prevent Memory Leak!
     destroy(u,c);
@@ -454,22 +469,18 @@ unsigned short facdDwn(unsigned short &number){
     return number;
 }
 
-string oppname(){
-    //Declare Variables
-    string c;
+player oppname(player c){
     cout<<"Now give your opponent a name. You didn't think you were playing ";
     cout<<"against the computer did you?"<<endl; 
-    getline(cin,c);
+    cin.getline(c.name,100);
     return c;
 }
 
-string intro(){
-    //Declare Variables
-    string c;
+player intro(player u){
     cout<<"The name of the game? WAR!"<<endl;
     cout<<"The object of the game is to throw down a card that is higher ";
     cout<<"than your opponent's card."<<endl;
     cout<<"Please enter your name."<<endl;
-    getline(cin,c);
-    return c;
+    cin.getline(u.name,100);
+    return u;
 }

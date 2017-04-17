@@ -11,7 +11,7 @@
 struct player{
     int *score;
     int wscore;
-    string name;
+    char *name;
     int card;
 };
 
