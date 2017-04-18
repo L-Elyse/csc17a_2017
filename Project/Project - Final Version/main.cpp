@@ -153,7 +153,6 @@ void finstat(player u,player c,int win,int lose,int war,const int SIZE){
 }
 
 void DayName(Day d){
-    //Output Day Names
     switch(d){
         case MONDAY:   cout<<"Monday    "; break;
         case TUESDAY:  cout<<"Tuesday   "; break;
@@ -208,7 +207,6 @@ void prntAry(player a,const int n){
 }
 
 void stats(player u,player c,int size){
-    //Output Scores of Players
     cout<<u.name<<"'s score: [ ";
     prntAry(u,size);
     cout<<"]"<<endl;
