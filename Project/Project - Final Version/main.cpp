@@ -24,7 +24,7 @@ using namespace std;
 enum Day {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY};
 
 //Function Prototypes
-player intro(player);
+player intro(player);  
 player oppname(player);
 unsigned short facdDwn(unsigned short &);
 const int getSize();
@@ -53,10 +53,10 @@ int main(int argc, char** argv){
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare Variables
-    unsigned short warcnt;
-    unsigned int choice;    //The menu option that user chooses
-    player user,comp;
-    bool again;
+    unsigned short warcnt;         //Number of war cards to "throw down"
+    unsigned int choice;           //The menu option that user chooses
+    player user,comp;              //Players
+    bool again;                    //Option to play more hands after game is over
         
     //Get Name of Opponent & Establish Number of "Faced Down" Cards
     user.name=new char[100];
@@ -66,8 +66,8 @@ int main(int argc, char** argv){
     facdDwn(warcnt);
     
     do{
-        int wins=0,losses=0,wars=0;
-        int count=0,i=0;
+        int wins=0,losses=0,wars=0; //Accumulators
+        int count=0,i=0;            //Used to keep track of number of hands
         const int SIZE=getSize();
         user.score=new int[SIZE];
         comp.score=new int [SIZE];
@@ -153,6 +153,7 @@ void finstat(player u,player c,int win,int lose,int war,const int SIZE){
 }
 
 void DayName(Day d){
+    //Output Day Names
     switch(d){
         case MONDAY:   cout<<"Monday    "; break;
         case TUESDAY:  cout<<"Tuesday   "; break;
@@ -207,6 +208,7 @@ void prntAry(player a,const int n){
 }
 
 void stats(player u,player c,int size){
+    //Output Scores of Players
     cout<<u.name<<"'s score: [ ";
     prntAry(u,size);
     cout<<"]"<<endl;
