@@ -1,25 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   main.cpp
- * Author: laurg
- *
+ * Author: Laurie Guimont
  * Created on May 7, 2017, 10:34 PM
+ * Purpose: Problem 3
  */
 
-#include <cstdlib>
-
+//System Libraries
+#include <iostream>
+#include <string>
 using namespace std;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
+//User Libraries
+#include "Car.h"
 
+//Execution Begins Here!
+int main(int argc, char** argv) {
+    //Declare Variables
+    int y;
+    string m;
+    
+    //Get Car's Model Year & Make
+    cout<<"Please enter the car's year model: ";
+    cin>>y;
+    cin.ignore();
+    cout<<"Enter the car's make: ";
+    getline(cin,m);
+    
+    //Declare Class Object
+    Car object(y,m);
+    
+    //Adjust and Output the Speed
+    cout<<endl;
+    cout<<object.getmake()<<" "<<object.getyear()<<endl;
+    cout<<"Accelerating Now!"<<endl;
+    for(int i=0;i<5;i++){
+        object.accelerate();
+        cout<<object.getspd()<<endl;
+    }
+    cout<<endl;
+    cout<<"Decelerating Now!"<<endl;
+    for(int i=0;i<5;i++){
+        cout<<object.brake()<<endl;
+    }
+
+    //Exit Stage Right!
     return 0;
 }
-
