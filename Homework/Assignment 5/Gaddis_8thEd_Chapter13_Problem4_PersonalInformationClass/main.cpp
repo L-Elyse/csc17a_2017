@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
         cout<<"Phone: ";
         getline(cin,p);
         
+        cout<<endl;
         cout<<"Here are what you input: \n";
         //Set the Information
         people[i].setname(n);
@@ -41,11 +42,10 @@ int main(int argc, char** argv) {
         people[i].setphne(p);
         
         //Get the Information
-        cout<<"Person "<<i+1<<endl;
         cout<<"Name: "<<people[i].getname()<<endl;
         cout<<"Address: "<<people[i].getaddy()<<endl;
         cout<<"Age: "<<people[i].getage()<<endl;
-        cout<<"Phone: "<<people[i].getphne()<<endl;
+        cout<<"Phone: "<<people[i].getphne()<<endl<<endl;
     }
 
     //Exit Stage Right!

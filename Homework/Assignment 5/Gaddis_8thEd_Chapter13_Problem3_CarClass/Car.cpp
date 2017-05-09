@@ -2,7 +2,7 @@
  * File:   Car.h
  * Author: Laurie Guimont
  * Created on May 7, 2017, 10:35 PM
- * Purpose: Car Class Specification
+ * Purpose: Car Class Implementation
  */
 
 #include <string>
