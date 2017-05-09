@@ -11,9 +11,9 @@ using namespace std;
 #include "RetailItem.h"
 
 RetailItem::RetailItem(string d, int u, float p){
-    descrpt="";
-    units=0;
-    price=0;
+    descrpt=d;
+    units=u;
+    price=p;
 }
 
 void RetailItem::setdesc(string d){

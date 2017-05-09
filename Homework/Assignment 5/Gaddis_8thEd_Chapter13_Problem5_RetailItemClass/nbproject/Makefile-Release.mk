@@ -63,12 +63,12 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gaddis_8thed_chapter13_problem5_retai
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gaddis_8thed_chapter13_problem5_retailitemclass ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/RetailItem.o: RetailItem.cpp 
+${OBJECTDIR}/RetailItem.o: RetailItem.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RetailItem.o RetailItem.cpp
 
-${OBJECTDIR}/main.o: main.cpp 
+${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
@@ -79,7 +79,6 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gaddis_8thed_chapter13_problem5_retailitemclass.exe
 
 # Subprojects
 .clean-subprojects:

@@ -17,11 +17,14 @@ void prntPtr(RetailItem);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
-    //Declare Variables
-    RetailItem item1,item2,item3;
+    //Declare & Initialize Class Variables
+    string d="";
+    int u=0;
+    float p=0;
+    RetailItem item1={d,u,p},item2={d,u,p},item3={d,u,p};
     
     //Set Item 1 Info
-    item1.setdesc("Jacket");
+    item1.setdesc("Jacket\t");
     item1.setunit(12);
     item1.setprce(59.95);
     
@@ -31,12 +34,13 @@ int main(int argc, char** argv) {
     item2.setprce(34.95);
     
     //Set Item 3 Info
-    item3.setdesc("Shirt");
+    item3.setdesc("Shirt\t");
     item3.setunit(20);
     item3.setprce(24.95);
     
     //Display All Information
-    cout<<"Decription\t\tUnits on Hand\t\tPrice"<<endl;
+    cout<<"\tDecription\t\tUnits on Hand\t\tPrice"<<endl;
+    cout<<"\t-----------------------------------------------------\n";
     cout<<"Item #1\t";
     prntPtr(item1);
     cout<<"Item #2\t";
@@ -49,5 +53,5 @@ int main(int argc, char** argv) {
 }
 
 void prntPtr(RetailItem i){
-    cout<<i.getdesc()<<"\t\t"<<i.getunit()<<"\t\t"<<i.getprce()<<endl;
+    cout<<i.getdesc()<<"\t\t      "<<i.getunit()<<"\t\t"<<i.getprce()<<endl;
 }
