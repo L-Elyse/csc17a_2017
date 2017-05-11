@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>Car.h</itemPath>
+      <itemPath>Circle.h</itemPath>
       <itemPath>Date.h</itemPath>
       <itemPath>Employee.h</itemPath>
       <itemPath>FeetInch.h</itemPath>
@@ -12,6 +13,7 @@
       <itemPath>NumDays.h</itemPath>
       <itemPath>Personal.h</itemPath>
       <itemPath>RetailItem.h</itemPath>
+      <itemPath>TestScores.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -56,6 +58,8 @@
       </item>
       <item path="Car.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Circle.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Date.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Date.h" ex="false" tool="3" flavor2="0">
@@ -83,6 +87,8 @@
       <item path="RetailItem.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="RetailItem.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestScores.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -111,6 +117,8 @@
       </item>
       <item path="Car.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Circle.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Date.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Date.h" ex="false" tool="3" flavor2="0">
@@ -138,6 +146,8 @@
       <item path="RetailItem.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="RetailItem.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestScores.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -21,9 +21,11 @@ void FeetInches::simplify(){
 bool FeetInches::operator <=(const FeetInches &right){
     bool status;
     
-    if(feet<=right.feet&&inches<=right.inches)
+    if(feet<right.feet)
         status=true;
-    else 
+    else if((feet==right.feet)&&(inches<=right.inches))
+        status=true;
+    else
         status=false;
     
     return status;
@@ -32,9 +34,11 @@ bool FeetInches::operator <=(const FeetInches &right){
 bool FeetInches::operator >=(const FeetInches &right){
     bool status;
     
-    if(feet>=right.feet&&inches>=right.inches)
+    if(feet>right.feet)
         status=true;
-    else 
+    else if((feet==right.feet)&&(inches>=right.inches))
+        status=true;
+    else
         status=false;
     
     return status;
@@ -43,7 +47,7 @@ bool FeetInches::operator >=(const FeetInches &right){
 bool FeetInches::operator !=(const FeetInches &right){
     bool status;
     
-    if(feet!=right.feet&&inches!=right.inches)
+    if((feet!=right.feet)||(inches!=right.inches))
         status=true;
     else 
         status=false;

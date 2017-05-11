@@ -3,6 +3,7 @@
 //Menu for Assignment 4
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <cstdlib>
 using namespace std;
@@ -12,6 +13,8 @@ using namespace std;
 #include "Car.h"
 #include "Personal.h"
 #include "RetailItem.h"
+#include "TestScores.h"
+#include "Circle.h"
 #include "NumDays.h"
 #include "FeetInches.h"
 #include "FeetInch.h"
@@ -58,8 +61,8 @@ void problem10();
            cout<<"Type 3 for Problem 3: Car Accelerate/Decelerate Program\n";
            cout<<"Type 4 for Problem 4: Personal Information Program"<<endl;
            cout<<"Type 5 for Problem 5: Retail Item Display Program"<<endl;
-           cout<<"Type 6 for Problem 6: "<<endl;
-           cout<<"Type 7 for Problem 7: "<<endl;
+           cout<<"Type 6 for Problem 6: Test Average Program"<<endl;
+           cout<<"Type 7 for Problem 7: Circle Information Program"<<endl;
            cout<<"Type 8 for Problem 8: Number of Work Days Program"<<endl;
            cout<<"Type 9 for Problem 9: FeetInches Modify Program"<<endl;
            cout<<"Type 10 for Problem 10: FeetInches 2nd Modify Program"<<endl;
@@ -79,7 +82,7 @@ void problem10();
         int m,d,y;
 
         //Input Data
-        cout<<"Please enter a month, day, and year."<<endl;
+        cout<<"Please enter a month, day, and a 4-digit year."<<endl;
         cin>>m>>d>>y;
 
         //Process Data
@@ -120,6 +123,7 @@ void problem10();
 
         //Output the Data
         cout<<"Name\t\tID Number\tDepartment\tPosition"<<endl;
+        cout<<"-------------------------------------------------------------\n";
         cout<<emp1.getname()<<"\t"<<emp1.getid()<<"\t\t"<<emp1.getdept()<<"\t"
                 <<emp1.getpos()<<endl;
         cout<<emp2.getname()<<"\t"<<emp2.getid()<<"\t\t"<<emp2.getdept()<<"\t\t"
@@ -233,15 +237,46 @@ void problem10();
     }
         void prntPtr(RetailItem i){
             cout<<i.getdesc()<<"\t\t      "<<i.getunit()<<"\t\t"<<i.getprce();
-            cout<<endl;
+            cout<<endl<<endl;
         }
     void problem6()
     {
-        
+        //Declare Variables
+        TestScores object;
+        float s1,s2,s3;
+
+        cout<<"Please enter three test scores: ";
+        cin>>s1>>s2>>s3;
+
+        //Set & Get Test Scores
+        object.setTest(s1,s2,s3);
+
+        cout<<"The test scores you entered were: "<<endl;
+        cout<<fixed<<setprecision(1)<<showpoint;
+        cout<<"Test #1: "<<object.getTst1()<<endl;
+        cout<<"Test #2: "<<object.getTst2()<<endl;
+        cout<<"Test #3: "<<object.getTst3()<<endl;
+        cout<<"The average of these is: ";
+        cout<<object.average()<<endl<<endl;
     }
     void problem7()
     {
-	
+	//Instantiate Class Object
+        float r;
+        Circle circle;
+
+        //Get Radius from User
+        cout<<"Enter the radius of a circle: "<<endl;
+        cin>>r;
+
+        //Set Radius and Begin Getting Information
+        circle.setRad(r);
+
+        cout<<"Thank you. Here is some information that you can obtain:"<<endl;
+        cout<<"Radius:        "<<circle.getRad()<<endl;
+        cout<<"Diameter:      "<<circle.getDiam()<<endl;
+        cout<<"Area:          "<<circle.getArea()<<endl;
+        cout<<"Circumference: "<<circle.getCrcm()<<endl<<endl;
     }
     void problem8()
     {
@@ -250,21 +285,24 @@ void problem10();
         NumDays second(28);
 
         //First's Hours & Number of Days
+        cout<<"First Number:"<<endl;
         cout<<"Number of Hours: "<<first.getHrs()<<endl;
-        cout<<"Number of Days:  "<<first.getDays()<<endl;
+        cout<<"Number of Work Days:  "<<first.getDays()<<endl<<endl;
 
         //Second's Hours & Number of Days
+        cout<<"Second Number:"<<endl;
         cout<<"Number of Hours: "<<second.getHrs()<<endl;
-        cout<<"Number of Days:  "<<second.getDays()<<endl;
+        cout<<"Number of Work Days:  "<<second.getDays()<<endl<<endl;
 
         //Instantiate Class Object
         NumDays third(0);
 
         //Demonstrating Operator Overload
         third=first+second;
+        cout<<"Testing Operator Overloading Now:"<<endl;
         cout<<"First + Second = "<<third.getDays()<<endl;
         third=first-second;
-        cout<<"First - Second = "<<third.getDays()<<endl; 
+        cout<<"First - Second = "<<third.getDays()<<endl<<endl; 
         cout<<"Testing first++:    "<<first++<<endl;
         cout<<"First's hours now:  "<<first.getHrs()<<endl;
         cout<<"Testing ++second:   "<<++second<<endl;
@@ -273,6 +311,7 @@ void problem10();
         cout<<"First's hours now:  "<<first.getHrs()<<endl;
         cout<<"Testing --second:   "<<--second<<endl;
         cout<<"Second's hours now: "<<second.getHrs()<<endl;
+        cout<<endl;
     }
     void problem9()
     {
@@ -296,12 +335,14 @@ void problem10();
         second.setInch(inches);
 
         //Compare the two objects
+        cout<<endl<<"Facts:"<<endl;
         if(first<=second)
             cout<<"first is less than or equal to second"<<endl;
         if(first>=second)
             cout<<"first is greater than or equal to second"<<endl;
         if(first!=second)
             cout<<"first does not equal second"<<endl;
+        cout<<endl;
     }
     void problem10()
     {
@@ -323,7 +364,7 @@ void problem10();
         first.multiply(second);
         cout<<endl;
         cout<<"After multiplying the distance by itself: "<<endl;
-        cout<<first.getFeet()<<"ft. "<<first.getInch()<<"in."<<endl;
+        cout<<first.getFeet()<<"ft. "<<first.getInch()<<"in."<<endl<<endl;
     }
     void def(int inN)
     {

@@ -20,10 +20,12 @@ int main(int argc, char** argv) {
     NumDays second(28);
     
     //First's Hours & Number of Days
+    cout<<"First:"<<endl;
     cout<<"Number of Hours: "<<first.getHrs()<<endl;
     cout<<"Number of Days:  "<<first.getDays()<<endl;
     
     //Second's Hours & Number of Days
+    cout<<"Second: "<<endl;
     cout<<"Number of Hours: "<<second.getHrs()<<endl;
     cout<<"Number of Days:  "<<second.getDays()<<endl;
     
@@ -31,6 +33,7 @@ int main(int argc, char** argv) {
     NumDays third(0);
     
     //Demonstrating Operator Overload
+    cout<<"Testing Operator Overloading Now:"<<endl;
     third=first+second;
     cout<<"First + Second = "<<third.getDays()<<endl;
     third=first-second;

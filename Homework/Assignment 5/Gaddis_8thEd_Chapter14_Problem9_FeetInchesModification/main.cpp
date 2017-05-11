@@ -34,6 +34,7 @@ int main(int argc, char** argv) {
     second.setInch(inches);
     
     //Compare the two objects
+    cout<<endl<<"Facts:"<<endl;
     if(first<=second)
         cout<<"first is less than or equal to second"<<endl;
     if(first>=second)
