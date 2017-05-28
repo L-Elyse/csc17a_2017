@@ -4,12 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>AbsCard.h</itemPath>
       <itemPath>Board.h</itemPath>
-      <itemPath>Chance.h</itemPath>
-      <itemPath>CommunityChest.h</itemPath>
+      <itemPath>ChncCom.h</itemPath>
       <itemPath>Die.h</itemPath>
-      <itemPath>Names.h</itemPath>
       <itemPath>Player.h</itemPath>
       <itemPath>Property.h</itemPath>
     </logicalFolder>
@@ -20,7 +17,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Chance.cpp</itemPath>
+      <itemPath>ChncCom.cpp</itemPath>
       <itemPath>Player.cpp</itemPath>
       <itemPath>Property.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -47,19 +44,13 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="AbsCard.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Board.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Chance.cpp" ex="false" tool="1" flavor2="0">
+      <item path="ChncCom.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Chance.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="CommunityChest.h" ex="false" tool="3" flavor2="0">
+      <item path="ChncCom.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Die.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Names.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -92,19 +83,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="AbsCard.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Board.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Chance.cpp" ex="false" tool="1" flavor2="0">
+      <item path="ChncCom.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Chance.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="CommunityChest.h" ex="false" tool="3" flavor2="0">
+      <item path="ChncCom.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Die.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Names.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>

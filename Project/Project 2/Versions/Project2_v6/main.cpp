@@ -14,18 +14,18 @@
 using namespace std;
 
 //User Libraries
+#include "ChncCom.h"
 #include "Die.h"
-#include "Names.h"
 #include "Player.h"
 #include "Property.h"
 
 //Function Prototypes
 char opening();
 int dieRoll();
-void play(Player,int &,Property,string &,int &);
+void play(Player,Player,int &,Property,string &,int &);
 void Menu();
 void prcsOpt(int,Player,Property,int &);
-void automat(Player,int &,Property,int &);
+void automat(Player,Player,int &,Property,int &);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
     //Instantiate Players, Property Object & Local Reference Variables
     Player user, comp;
     Property prop;
-    int current=Names::GO,compcur=Names::GO;
+    int current=0,compcur=0;
     int userMon=user.getMony(),compMon=comp.getMony();
     string land;
     bool again=true;  //Maybe make a char instead to use cctype!!
@@ -43,13 +43,13 @@ int main(int argc, char** argv) {
     //Begin to see who goes first
     char first;
     first=opening();
-    if(first=='c') automat(comp,compcur,prop,compMon);
+    if(first=='c') automat(comp,user,compcur,prop,compMon);
     cout<<"----------------------------------------"<<endl;
     
     //Begin Playing
     do{
-        play(user,current,prop,land,userMon);
-        automat(comp,compcur,prop,compMon);
+        play(user,comp,current,prop,land,userMon);
+        automat(comp,user,compcur,prop,compMon);
         cout<<"----------------------------------------"<<endl;
         cout<<"Would you like to continue playing the game?"<<endl;
         cin>>again;
@@ -61,14 +61,19 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void automat(Player c,int &last,Property prop,int &mon){
+void automat(Player c,Player u,int &last,Property prop,int &mon){
+    ChncCom temp;
+    
     last+=dieRoll();
     prop.inform(last,c.getNHse());
     int total=mon-prop.getprce();
     c.setMony(total);
     mon=c.getMony();
     cout<<"Your opponent landed on "<<prop.getname();
-    //Check to see if landed on any non-properties
+//    if(prop.getname()=="Chance")
+//        temp.setMess(1,c,u);
+//    else if(prop.getname()=="Community Chest")
+//        temp.setMess(2,c,u);
     cout<<" and bought it for "<<prop.getprce()<<endl;
     cout<<"Opponent now has $"<<mon<<endl;
 }
@@ -116,14 +121,21 @@ int dieRoll(){
     return die1.getVal()+die2.getVal();
 }
 
-void play(Player u,int &last,Property spot,string &land,int &money){  
+void play(Player u,Player c,int &last,Property spot,string &land,int &money){  
     //Declare Menu Choice Variable
     int choice;
+    ChncCom temp;
     
     last+=dieRoll();    //Write "restart to GO" procedure
     spot.inform(last,u.getNHse());
     land=spot.getname();
     cout<<"You landed on "<<land<<" which is worth $"<<spot.getprce()<<endl;
+    
+    //Check for Chance or Community Chest Card
+//    if(land=="Chance")
+//        temp.setMess(1,u,c);
+//    else if(land=="Community Chest")
+//        temp.setMess(2,u,c);
     Menu();
     cin>>choice;       //Overload the >> operator to display player info
     //Validate with try/catch

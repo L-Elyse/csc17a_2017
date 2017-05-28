@@ -8,9 +8,14 @@
 #ifndef PROPERTY_H
 #define PROPERTY_H
 #include "Board.h"
-#include "Names.h"
 
-class Property : public Board , public Names{
+enum Name {GO,MDTRRNN,COMMCH1,BALTIC,INCOME,READRR,ORIENTL,CHANCE1,
+            VERMONT,CONNECT,JAIL,STCHRLS,ELECTRC,STATES,VIRGNIA,PENNRR,
+            STJAMES,COMMCH2,TENNESE,NEWYORK,PARKING,KENTCKY,CHANCE2,INDIANA,
+            ILLNOIS,BNORR,ATLANTC,VENTNOR,WATERWK,MARVIN,GO2JAIL,PACIFIC,
+            NCARLNA,COMMCH3,PENNSYL,SHORTLN,CHANCE3,PARK,LUXTAX,BRDWALK};
+
+class Property : public Board{
     private:
         int rent;          //Amount of rent to charge players
         int mortgge;       //Amount of mortgage to pay the bank if necessary
@@ -28,7 +33,8 @@ class Property : public Board , public Names{
             if(number==1)rent=4*util;
             else rent=10*util;
         }
-        virtual void inform(int title,int number);
+       
+        virtual void inform(int,int);
 };
 
 #endif /* PROPERTY_H */

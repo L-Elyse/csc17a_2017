@@ -68,6 +68,8 @@ void Property::inform(int title,int number){
             break;
         case INCOME:
             name="Income Tax";
+            price=200;
+            color="tax";
             break;
         case READRR:
             name="Reading Railroad";
@@ -383,7 +385,7 @@ void Property::inform(int title,int number){
             name="Chance";
             break;
         case PARK:
-            name="Park";
+            name="Park Place";
             price=350;
             color="blue";
             if(number==1)rent=175;
@@ -397,6 +399,8 @@ void Property::inform(int title,int number){
             break;
         case LUXTAX:
             name="Luxury Tax";
+            price=75;
+            color="tax";
             break;
         case BRDWALK:
             name="Boardwalk";

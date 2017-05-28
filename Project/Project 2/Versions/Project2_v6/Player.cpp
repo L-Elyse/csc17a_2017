@@ -14,8 +14,7 @@ using namespace std;
 Player::Player(){
     money=1500;                
     nProps=0;                  
-//    proprty=new int[40];      
-    piece="";                  
+//    proprty=new int[40];                 
     nHouses=0;                 
     nHotels=0;                 
 }
@@ -39,10 +38,6 @@ unsigned short Player::getNPrp()const{
 //int *Player::getPrps(){
 //    return proprty;
 //}
-
-string Player::getPce()const{
-    return piece;
-}
 
 int Player::getNHse()const{
     return nHouses;

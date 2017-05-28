@@ -11,8 +11,6 @@
 #include <string>
 using namespace std;
 
-#include "Names.h"
-
 class Board{
     protected:
         string name;       //Property Names
@@ -33,7 +31,7 @@ class Board{
         string getcolr()const{
             return color;
         }
-        virtual void inform(int title,int number)=0;
+        virtual void inform(int,int)=0;
 };
 
 #endif /* BOARD_H */
