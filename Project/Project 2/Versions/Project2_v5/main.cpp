@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on May 26, 2017, 1:55 PM
+ * Created on May 27, 2017, 3:45 PM
  * Purpose: Monopoly Game
  */
 
@@ -14,7 +14,6 @@
 using namespace std;
 
 //User Libraries
-#include "Board.h"
 #include "Die.h"
 #include "Names.h"
 #include "Player.h"
@@ -23,45 +22,37 @@ using namespace std;
 //Function Prototypes
 char opening();
 int dieRoll();
-//void play(Player,int &,Board);
+void play(Player,int &,Property,string &,int &);
 void Menu();
-void prcsOpt(int,Player,Property);
-void automat(Player,int &,Property);
+void prcsOpt(int,Player,Property,int &);
+void automat(Player,int &,Property,int &);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
     //Set the Random Number Seed
     srand(static_cast<unsigned int>(time(0)));
     
-    //Instantiate Players
+    //Instantiate Players, Property Object & Local Reference Variables
     Player user, comp;
     Property prop;
-    
-    Names counter;
-    int choice;
-    int current=0,compcur=0;
-    bool again=true;
+    int current=Names::GO,compcur=Names::GO;
+    int userMon=user.getMony(),compMon=comp.getMony();
+    string land;
+    bool again=true;  //Maybe make a char instead to use cctype!!
     
     //Begin to see who goes first
     char first;
     first=opening();
-    if(first=='c') automat(comp,compcur,prop);
+    if(first=='c') automat(comp,compcur,prop,compMon);
     cout<<"----------------------------------------"<<endl;
     
     //Begin Playing
     do{
-//        play(user,current,spot);
-        current+=dieRoll();    //Write "restart to GO" procedure
-        prop.setup(current);
-        cout<<"You landed on "<<prop.getname()<<" which is worth $";
-        cout<<prop.getprce()<<endl;;
-        Menu();
-        cin>>choice;       //Overload the >> operator to display player info
-        //Validate with try/catch
-        prcsOpt(choice,user,prop);
-        automat(comp,compcur,prop);
+        play(user,current,prop,land,userMon);
+        automat(comp,compcur,prop,compMon);
         cout<<"----------------------------------------"<<endl;
-        //Keep Playing?
+        cout<<"Would you like to continue playing the game?"<<endl;
+        cin>>again;
     }while(again==true);
     
     cout<<"Thank you for playing!!"<<endl;
@@ -70,23 +61,26 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void automat(Player c,int &last,Property prop){
+void automat(Player c,int &last,Property prop,int &mon){
     last+=dieRoll();
-    prop.setup(last);
-    int total=c.getMony()-prop.getprce();
+    prop.inform(last,c.getNHse());
+    int total=mon-prop.getprce();
     c.setMony(total);
+    mon=c.getMony();
     cout<<"Your opponent landed on "<<prop.getname();
     //Check to see if landed on any non-properties
     cout<<" and bought it for "<<prop.getprce()<<endl;
-    cout<<"Opponent now has $"<<c.getMony()<<endl;
+    cout<<"Opponent now has $"<<mon<<endl;
 }
 
-void prcsOpt(int decide,Player u,Property prop){
-    //Process the Decision
+void prcsOpt(int decide,Player u,Property prop,int &mon){
+    //Process the Menu Decision
     if(decide==1){
         cout<<"$"<<prop.getprce()<<" was deducted from your account."<<endl;
-        int total=u.getMony()-prop.getprce();
+        int total=mon-prop.getprce();
         u.setMony(total);
+        mon=u.getMony();
+        cout<<"You now have $"<<mon<<endl;
         cout<<"Congratulations on your purchase!"<<endl;
     }
     else if(decide==2)    //This is where auction would occur
@@ -103,6 +97,7 @@ void prcsOpt(int decide,Player u,Property prop){
 }
 
 void Menu(){
+    //In-Game Menu
     cout<<"What would you like to do?"<<endl;
     cout<<"1. Purchase the Property."<<endl;
     cout<<"2. Just Visit the Property."<<endl;
@@ -116,16 +111,24 @@ int dieRoll(){
     
     //Roll the dice
     die1.roll();
-    die2.roll();
+    die2.roll();           //Need to show dice!!
     
     return die1.getVal()+die2.getVal();
 }
 
-//void play(Player u,int &last,Board spot){  
-//    last+=dieRoll();    //Write "restart to GO" procedure
-//    spot.setup(last);
-//    cout<<"You landed on "<<spot.getname()<<endl;
-//}
+void play(Player u,int &last,Property spot,string &land,int &money){  
+    //Declare Menu Choice Variable
+    int choice;
+    
+    last+=dieRoll();    //Write "restart to GO" procedure
+    spot.inform(last,u.getNHse());
+    land=spot.getname();
+    cout<<"You landed on "<<land<<" which is worth $"<<spot.getprce()<<endl;
+    Menu();
+    cin>>choice;       //Overload the >> operator to display player info
+    //Validate with try/catch
+    prcsOpt(choice,u,spot,money);
+}
 
 char opening(){
     //Declare Comparison Variables
@@ -134,7 +137,7 @@ char opening(){
     cout<<"Hello! Welcome to the wonderful game of Monopoly!"<<endl;
     cout<<"Before we begin, do you need to read the instructions?"<<endl;
     //Create a boolean input where if the answer is affirmative, output the
-    //instructions, which will be read in from a file
+    //instructions, which will be read in from a file & validate with t/c
     cout<<"We will begin the game by rolling the dice to see who gets to go ";
     cout<<"first!"<<endl<<endl;
     cout<<"Let's start with your opponent."<<endl;
