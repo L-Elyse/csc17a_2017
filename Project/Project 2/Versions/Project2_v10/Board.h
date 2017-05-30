@@ -31,6 +31,12 @@ class Board{
         string getcolr()const{
             return color;
         }
+        string colList(int index){
+            string colors[10]={"purple","RR","lilac","pink","Utility","orange",
+                                "red","yellow","green","blue"};
+            
+            return colors[index];
+        }
         virtual void inform(int,int)=0;
 };
 

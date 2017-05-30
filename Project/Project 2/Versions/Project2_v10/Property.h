@@ -21,12 +21,14 @@ class Property : public Board{
         int mortgge;       //Amount of mortgage to pay the bank if necessary
         int hseCost;       //Cost per house
         int htlCost;       //Cost per hotel
+        int maxColr;       //Number of properties in a color group
     public:
         Property();
         int getrent()const;
         int getmrgg()const;
         int getHseC()const;
         int getHtlC()const;
+        int setcMax(string);
         
         template <class T1,class T2>
         void utilRnt(T1 &number,T2 &util){

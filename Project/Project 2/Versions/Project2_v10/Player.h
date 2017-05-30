@@ -9,6 +9,7 @@
 #define PLAYER_H
 #include "ChncCom.h"
 #include "Rules.h"
+#include "Property.h"
 
 class Player{
     private:
@@ -27,14 +28,18 @@ class Player{
         void *setPrps();
         void setNew(int);
         void setSpot(int);
-        void setNHse(int);
-        void setNHtl(int);
+        void setNHse();
+        void setNHtl(Property &);
+        void payRent(int);
         int getMony()const;
         unsigned short getNPrp()const;
         int getSpot()const;
         void *getPrps();
+        bool findPrp(int);
         int getNHse()const;
         int getNHtl()const;
+        
+        //Friends
         friend void ChncCom::setMess(unsigned short,short,Player &,Player &,Rules &);
         friend void Rules::Go2Jail(Player &);
         friend void Rules::cGoJail(Player &);

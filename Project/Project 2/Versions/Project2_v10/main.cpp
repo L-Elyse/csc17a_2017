@@ -23,9 +23,11 @@ using namespace std;
 char opening();
 int dieRoll();
 void play(Player &,Player &,Property &,short &,short &);
-void Menu();
+void check(Player &,Player &,Property &,short &,short &);
+void Menu(Property &);
 void prcsOpt(int,Player &,Property &);
 void automat(Player &,Player &,Property &,short &,short &);
+void autochk(Player &,Player &,Property &,short &,short &);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -60,19 +62,16 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
+void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     ChncCom temp;
     Rules check;
     
-    check.restart(dieRoll(),c);
-    prop.inform(c.getSpot(),c.getNHse());
-    int total=c.getMony()-prop.getprce();
-    c.setMony(total);
-    cout<<"Your opponent landed on "<<prop.getname();
     if(prop.getname()=="Chance"){
         temp.setMess(1,chnindx,c,u,check);
         cout<<endl<<temp.getMess()<<endl;
         chnindx++;
+        if(c.getSpot()==30)
+            check.cGoJail(c);
     }
     else if(prop.getname()=="Community Chest"){
         temp.setMess(2,comindx,c,u,check);
@@ -81,16 +80,39 @@ void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     }
     else if(prop.getname()=="Go To Jail")
         check.cGoJail(c);
-    if(c.getSpot()==30)
-        check.cGoJail(c);
     else{
-        cout<<" and bought it for "<<prop.getprce()<<endl;
-        c.setPrps();
-        cout<<"Opponent now has $"<<c.getMony()<<endl;
+        if(u.findPrp(c.getSpot())==true){
+            c.payRent(prop.getrent());
+            cout<<endl;
+            cout<<"You already own "<<prop.getname()<<". Your opponent pays ";
+            cout<<"you $"<<prop.getrent()<<" of rent."<<endl;
+            u.setMony(u.getMony()+prop.getrent());
+        }
+        else if(c.findPrp(c.getSpot())==true)
+            cout<<"They already own this property."<<endl;
+        else{
+            int total=c.getMony()-prop.getprce();
+            c.setMony(total);
+            cout<<" and bought it for "<<prop.getprce()<<endl;
+            c.setPrps();
+            cout<<"Opponent now has $"<<c.getMony()<<endl;
+        }
     }
 }
 
+void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){    
+    Rules check;
+    
+    check.restart(dieRoll(),c);
+    prop.inform(c.getSpot(),c.getNHse());
+    cout<<"Your opponent landed on "<<prop.getname();
+    
+    autochk(c,u,prop,comindx,chnindx);
+}
+
 void prcsOpt(int decide,Player &u,Property &prop){
+    bool endturn=true;
+    
     //Process the Menu Decision
     if(decide==1){
         cout<<"$"<<prop.getprce()<<" was deducted from your account."<<endl;
@@ -100,23 +122,26 @@ void prcsOpt(int decide,Player &u,Property &prop){
         cout<<"You now have $"<<u.getMony()<<endl;
         cout<<"Congratulations on your purchase!"<<endl;
     }
-    else if(decide==2)    //This is where auction would occur
+    else if(decide==2)
         cout<<"Thanks for the visit!"<<endl;
-    else if(decide==3){   //Error-catching Function needs to be written
-        cout<<"You can only purchase houses if you have obtained all the ";
-        cout<<"properties in the "<<prop.getcolr()<<" color group!"<<endl;
+    else if(decide==3){
+        u.setNHse();
     }
-    else if(decide==4){   //Error-catching Function needs to be written
-        cout<<"You can only purchase hotels if you have first purchased ";
-        cout<<"4 houses!"<<endl;
+    else if(decide==4){
+        u.setNHtl(prop);
     }
     cout<<endl;
+    
+    cout<<"Would you like to end turn? ";
+    cin>>endturn;
+    if(endturn==false)
+        Menu();
 }
 
-void Menu(){
+void Menu(Property &prop){
     //In-Game Menu
     cout<<"What would you like to do?"<<endl;
-    cout<<"1. Purchase the Property."<<endl;
+    cout<<"1. Purchase "<<prop.getname()<<" for $"<<prop.getprce()"."<<endl;
     cout<<"2. Just Visit the Property."<<endl;
     cout<<"3. Build a House."<<endl;
     cout<<"4. Build a Hotel."<<endl;
@@ -135,22 +160,18 @@ int dieRoll(){
     return die1.getVal()+die2.getVal();
 }
 
-void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){  
-    //Declare Menu Choice Variable
-    int choice;
-    ChncCom temp;
+void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     Rules check;
-    
-    check.restart(dieRoll(),u);
-    spot.inform(u.getSpot(),u.getNHse());
-    cout<<"You landed on "<<spot.getname()<<" which is worth $"
-            <<spot.getprce()<<endl;
+    ChncCom temp;
+    int choice;
     
     //Check for Special "Properties"
     if(spot.getname()=="Chance"){
         temp.setMess(1,chnindx,u,c,check);
         cout<<endl<<temp.getMess()<<endl;
-        chnindx++;
+        chnindx++;  
+        if(u.getSpot()==30)
+            check.Go2Jail(u);
     }
     else if(spot.getname()=="Community Chest"){
         temp.setMess(2,comindx,u,c,check);
@@ -160,14 +181,35 @@ void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     else if(spot.getname()=="Go To Jail"){
         check.Go2Jail(u);
     }
-    if(u.getSpot()==30)
-        check.Go2Jail(u);
     else{
-        Menu();
-        cin>>choice;       //Overload the >> operator to display player info
-        //Validate with try/catch
-        prcsOpt(choice,u,spot);
+        if(c.findPrp(u.getSpot())==true){
+            u.payRent(spot.getrent());
+            cout<<endl;
+            cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
+            cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
+            c.setMony(c.getMony()+spot.getrent());
+        }
+        else if(u.findPrp(u.getSpot()==true))
+            cout<<"You already own this property."<<endl;
+        else{
+            Menu();
+            cin>>choice;       //Overload the >> operator to display player info
+            //Validate with try/catch
+            prcsOpt(choice,u,spot);
+        }
     }
+}
+
+void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){  
+    //Declare Menu Choice Variable
+    Rules test;
+    
+    test.restart(dieRoll(),u);
+    spot.inform(u.getSpot(),u.getNHse());
+    cout<<"You landed on "<<spot.getname();
+    
+    //Check for Special "Properties"
+    check(u,c,spot,comindx,chnindx);
 }
 
 char opening(){
