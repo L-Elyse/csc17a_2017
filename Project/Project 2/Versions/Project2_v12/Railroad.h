@@ -11,6 +11,7 @@
 #include "Player.h"
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Railroad:public Property{
@@ -30,6 +31,19 @@ class Railroad:public Property{
             
             return RR.rent;
         };
+        virtual string getPos(int named) const{
+            string postion;
+            
+            if(named==READRR)
+                postion="first";
+            else if(named==PENNRR)
+                postion="second";
+            else if(named==BNORR)
+                postion="third";
+            else if(named==SHORTLN)
+                postion="fourth";
+            return postion;
+        }
 };
 
 #endif /* RAILROAD_H */

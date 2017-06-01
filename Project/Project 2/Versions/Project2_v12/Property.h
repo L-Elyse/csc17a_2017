@@ -9,6 +9,9 @@
 #define PROPERTY_H
 #include "Board.h"
 
+#include <string>
+using namespace std;
+
 enum Name {GO,MDTRRNN,COMMCH1,BALTIC,INCOME,READRR,ORIENTL,CHANCE1,
             VERMONT,CONNECT,JAIL,STCHRLS,ELECTRC,STATES,VIRGNIA,PENNRR,
             STJAMES,COMMCH2,TENNESE,NEWYORK,PARKING,KENTCKY,CHANCE2,INDIANA,
@@ -25,14 +28,28 @@ class Property : public Board{
     public:
         Property();
         int getrent()const;
-        virtual int getHseC()const;
-        virtual int getHtlC()const;
+        int getHseC()const;
+        int getHtlC()const;
         int setcMax(string);
         
         template <class T1,class T2>
         void utilRnt(T1 &number,T2 &util){
             if(number==1)rent=4*util;
             else rent=10*util;
+        }
+        
+        virtual string getPos(int named)const{
+            string postion;
+            if(named==READRR)
+                postion="Reading";
+            else if(named==PENNRR)
+                postion="Pennsylvania";
+            else if(named==BNORR)
+                postion="B & O";
+            else if(named==SHORTLN)
+                postion="Short Line";
+            
+            return postion;
         }
         
         virtual void inform(int,int);

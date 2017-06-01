@@ -66,7 +66,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 if(opp.findPrp(player.getSpot())==true){
                     player.payRent(RR.setrent(opp,player.spot));
                     cout<<endl;
-                    cout<<opp.getName()<<" already owns this railroad. You owe ";
+                    cout<<"Your opponent already owns this railroad. You owe ";
                     cout<<"them $"<<RR.setrent(opp,player.spot)<<" of rent."<<endl;
                     opp.setMony(opp.getMony()+RR.setrent(opp,player.spot));
                 }
@@ -87,7 +87,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<opp.getName()<<" already owns "<<spot.getname()<<". You owe ";
+                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
                     cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
@@ -137,7 +137,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<opp.getName()<<" already owns "<<spot.getname()<<". You owe ";
+                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
                     cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
@@ -173,7 +173,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<opp.getName()<<" already owns "<<spot.getname()<<". You owe ";
+                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
                     cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
@@ -221,7 +221,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<opp.getName()<<" already owns "<<spot.getname()<<". You owe ";
+                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
                     cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
