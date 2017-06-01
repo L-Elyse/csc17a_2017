@@ -10,11 +10,12 @@
 #include "Property.h"
 #include "Player.h"
 
+#include <iostream>
+using namespace std;
+
 class Railroad:public Property{
-    private:
-        int rent;
     public:
-        int setrent(Player &player){
+        int setrent(Player &player,int current){
             Railroad RR;
             int count=0;
             if(player.findPrp(READRR)==true)
@@ -25,11 +26,9 @@ class Railroad:public Property{
                 count++;
             if(player.findPrp(SHORTLN)==true)
                 count++;
-            RR.inform(player.getSpot(),count);
+            RR.inform(current,count);
             
-            rent=RR.getrent();
-            
-            return rent;
+            return RR.rent;
         };
 };
 

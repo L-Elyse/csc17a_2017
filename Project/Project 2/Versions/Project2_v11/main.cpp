@@ -34,6 +34,7 @@ void prcsOpt(int,Player &,Property &);
 void automat(Player &,Player &,Property &,short &,short &);
 void autochk(Player &,Player &,Property &,short &,short &);
 int validte(int);
+//void driver(const Property &);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -45,6 +46,14 @@ int main(int argc, char** argv) {
     Property prop;
     short chance=1,comchst=1;
     char again;
+    
+    ////////////////////////////////////////////////////////////////////////////
+//    Railroad tester;
+//    user.setNew(READRR);
+//    user.setPrps();
+//    tester.setrent(user);
+//    
+//    driver(tester);
     
     //Begin to see who goes first
     char first;
@@ -96,11 +105,11 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     else{
         if(u.findPrp(c.getSpot())==true){
             if(prop.getcolr()=="RR"){
-                c.payRent(RR.setrent(u));
+                c.payRent(RR.setrent(u,c.getSpot()));
                 cout<<endl;
                 cout<<"You already own "<<prop.getname()<<". Your opponent pays ";
-                cout<<"you $"<<RR.setrent(u)<<" of rent."<<endl;
-                u.setMony(u.getMony()+RR.setrent(u));
+                cout<<"you $"<<RR.setrent(u,c.getSpot())<<" of rent."<<endl;
+                u.setMony(u.getMony()+RR.setrent(u,c.getSpot()));
             }
             else if(prop.getcolr()=="Utility"){
                 int number;
@@ -127,11 +136,11 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
         else{
             int total=c.getMony()-prop.getprce();
             c.setMony(total);
-            cout<<" and bought it for "<<prop.getprce()<<endl;
+            cout<<" and bought it for $"<<prop.getprce()<<endl;
             c.setPrps();
-            cout<<"Opponent now has $"<<c.getMony()<<endl;
         }
     }
+    cout<<c;
 }
 
 void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){    
@@ -139,7 +148,7 @@ void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     
     check.restart(dieRoll(),c);
     prop.inform(c.getSpot(),u.getNHse());
-    cout<<"Your opponent landed on "<<prop.getname();
+    cout<<"Your opponent landed on "<<prop.getname()<<endl;
     
     autochk(c,u,prop,comindx,chnindx);
 }
@@ -213,7 +222,7 @@ int dieRoll(){
     
     cout<<"Die 1: "<<die1.getVal()<<"  Die 2: "<<die2.getVal()<<endl;
     
-    return die1.getVal()+die2.getVal();
+    return 5;
 }
 
 void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
@@ -245,12 +254,12 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     }
     else{
         if(c.findPrp(u.getSpot())==true){
-            if(spot.getcolr()!="RR"){
-                u.payRent(spot.getrent());
+            if(spot.getcolr()=="RR"){
+                u.payRent(RR.setrent(c,u.getSpot()));
                 cout<<endl;
                 cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
-                cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
-                c.setMony(c.getMony()+spot.getrent());
+                cout<<"them $"<<RR.setrent(c,u.getSpot())<<" of rent."<<endl;
+                c.setMony(c.getMony()+RR.setrent(c,u.getSpot()));
             }
             else if(spot.getcolr()=="Utility"){
                 int number;
@@ -260,16 +269,17 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
                 else number=2;
                 spot.utilRnt(number,total);
                 u.payRent(spot.getrent());
-                cout<<"Your opponent already own "<<spot.getname()<<". Your owe ";
+                cout<<"Your opponent already owns "<<spot.getname()<<". Your owe ";
                 cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                 c.setMony(c.getMony()+spot.getrent());
             }
             else{
-                c.payRent(RR.setrent(u));
+                u.payRent(spot.getrent());
                 cout<<endl;
-                cout<<"Your opponent already owns this railroad. You owe ";
-                cout<<"them $"<<RR.setrent(u)<<" of rent."<<endl;
-                u.setMony(u.getMony()+RR.setrent(u));
+                cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
+                cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
+                c.setMony(c.getMony()+spot.getrent());
+                
             }
         }
         else if(u.findPrp(u.getSpot()==true))
@@ -278,6 +288,7 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
             Menu(spot,u);
         }
     }
+    cout<<u;
 }
 
 void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){  
@@ -348,3 +359,7 @@ char opening(){
         else cout<<"It's a Tie! Let's try this again."<<endl;
     }while(comp==user);
 }
+
+//void driver(const Property &prop){
+//    cout<<"The rent is $"<<prop.getrent()<<endl;
+//}

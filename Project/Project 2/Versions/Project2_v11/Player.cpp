@@ -77,7 +77,7 @@ void Player::setNHse(){
                 cin>>numHse;
                 nHouses+=numHse;
                 cout<<"You now own "<<nHouses<<" houses. Due to this change, ";
-                cout<<"the rent of all properties in the community go up. \n";
+                cout<<"the rent of all of your properties goes up. \n";
             }
         }       
     }
@@ -140,4 +140,19 @@ int Player::getNHse()const{
 
 int Player::getNHtl()const{
     return nHotels;
+}
+
+ostream &operator << (ostream &stream,const Player &right){
+    Property prop;
+    
+    cout<<"\t\t\t\t\t\t\tMoney: $";
+    stream<<right.money<<endl;
+    cout<<"\t\t\t\t\t\t\tProperties:"<<endl;
+    for(int i=0;i<right.nProps;i++){
+        prop.inform(*(right.proprty+i),right.nHouses);
+        cout<<"\t\t\t\t\t\t\t   ";
+        stream<<prop.getname()<<endl;
+    }
+    
+    return stream;
 }

@@ -41,9 +41,9 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     player.money+=200;
                 }
                 if(opp.findPrp(player.getSpot())==true){
-                    player.money-=(RR.setrent(player)*2);
-                    cout<<"Charged: "<<RR.setrent(player);
-                    opp.money+=(RR.setrent(player)*2);
+                    player.money-=(RR.setrent(opp,player.spot)*2);
+                    cout<<"Charged: "<<RR.setrent(opp,player.spot);
+                    opp.money+=(RR.setrent(opp,player.spot)*2);
                 }
                 else if(opp.findPrp(player.getSpot())!=true&&
                         player.findPrp(player.getSpot())!=true){
@@ -65,11 +65,11 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 player.setNew(READRR);
                 player.money+=200;
                 if(opp.findPrp(player.getSpot())==true){
-                    player.payRent(RR.setrent(opp));
+                    player.payRent(RR.setrent(opp,player.spot));
                     cout<<endl;
                     cout<<"Your opponent already owns this railroad. You owe ";
-                    cout<<"them $"<<RR.setrent(opp)<<" of rent."<<endl;
-                    opp.setMony(opp.getMony()+RR.setrent(opp));
+                    cout<<"them $"<<RR.setrent(opp,player.spot)<<" of rent."<<endl;
+                    opp.setMony(opp.getMony()+RR.setrent(opp,player.spot));
                 }
                 break;
             }
@@ -107,8 +107,9 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     player.money+=200;
                 }
                 if(opp.findPrp(player.getSpot())==true){
-                    player.money-=(RR.setrent(player)*2);
-                    opp.money+=(RR.setrent(player)*2);
+                    player.money-=(RR.setrent(opp,player.spot)*2);
+                    cout<<"Charged: "<<RR.setrent(opp,player.spot);
+                    opp.money+=(RR.setrent(opp,player.spot)*2);
                 }
                 else if(opp.findPrp(player.getSpot())!=true&&
                         player.findPrp(player.getSpot())!=true){

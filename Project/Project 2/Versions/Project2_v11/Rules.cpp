@@ -97,3 +97,13 @@ void Rules::restart(int num,Player &player){
     else
         player.setSpot(num);
 }
+
+int Rules::gameEnd(Player &player){
+    if(player.getMony()<0){
+        cout<<"Oh no! You are in debt!"<<endl;
+        cout<<"Sorry. Maybe next time you will make better decisions.";
+        cout<<"The game is over!! We have a winner!"<<endl;
+    }
+    
+    return 0;    
+}

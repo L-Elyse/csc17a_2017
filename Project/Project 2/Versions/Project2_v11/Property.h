@@ -15,15 +15,16 @@ enum Name {GO,MDTRRNN,COMMCH1,BALTIC,INCOME,READRR,ORIENTL,CHANCE1,
             ILLNOIS,BNORR,ATLANTC,VENTNOR,WATERWK,MARVIN,GO2JAIL,PACIFIC,
             NCARLNA,COMMCH3,PENNSYL,SHORTLN,CHANCE3,PARK,LUXTAX,BRDWALK};
 
-class Property : public Board{
+class Property : public Board{ 
     private:
-        int rent;          //Amount of rent to charge players
         int hseCost;       //Cost per house
         int htlCost;       //Cost per hotel
         int maxColr;       //Number of properties in a color group
+    protected:
+        int rent;          //Amount of rent to charge players
     public:
         Property();
-        int getrent()const;    //PLEASE LOOK INTO THIS AS POLYMORPHISM!!!!
+        virtual int getrent()const;
         int getHseC()const;
         int getHtlC()const;
         int setcMax(string);

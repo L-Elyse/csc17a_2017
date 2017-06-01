@@ -11,6 +11,12 @@
 #include "Rules.h"
 #include "Property.h"
 
+#include <iostream>
+using namespace std;
+
+class Player;
+ostream &operator<<(ostream &,const Player &);
+
 class Player{
     private:
         char *name;             //Player Name
@@ -50,6 +56,9 @@ class Player{
         friend void Rules::Go2Jail(Player &);
         friend void Rules::cGoJail(Player &);
         friend void Rules::restart(int,Player &);
+        
+        //Overload << Operator
+        friend ostream &operator<<(ostream &,const Player &);
 };
 
 #endif /* PLAYER_H */
