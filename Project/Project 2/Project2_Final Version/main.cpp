@@ -24,19 +24,16 @@ using namespace std;
 #include "Rules.h"
 
 //Function Prototypes
-char opening(char *,char *);
+char opening(Player &,Player &);
 void rdInstr();
 int dieRoll();
-void play(Player &,Player &,Property &,short &,short &,char *);
-void check(Player &,Player &,Property &,short &,short &,char *);
+void play(Player &,Player &,Property &,short &,short &);
+void check(Player &,Player &,Property &,short &,short &);
 void Menu(Property &,Player &);
 void prcsOpt(int,Player &,Property &);
-void automat(Player &,Player &,Property &,short &,short &,char *);
-void autochk(Player &,Player &,Property &,short &,short &,char *);
+void automat(Player &,Player &,Property &,short &,short &);
+void autochk(Player &,Player &,Property &,short &,short &);
 int validte(int);
-void outBin(Player &,Player &);
-void destroy(char *,char *);
-void driver(const Property &);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -50,32 +47,17 @@ int main(int argc, char** argv) {
     short chance=1,comchst=1;
     char again;
     
-//    Railroad test;
-//    driver(test);
-    
-    //Get & Set Names
-     cout<<"Hello! Welcome to the wonderful game of Monopoly!"<<endl;
-    cout<<"Before we begin, please enter your name. ";
-    user.setName();
-    cout<<"And also enter the name of your opponent. ";
-    comp.setName();
-    
-    int size=strlen(user.getName());
-    int csize=strlen(comp.getName());
-    char *uname=new char[size];
-    char *cname=new char[csize];
-    
     //Begin to see who goes first
     char first;
-    first=opening(uname,cname);
+    first=opening(user,comp);
     if(first=='c') 
-        automat(comp,user,prop,comchst,chance,cname);
+        automat(comp,user,prop,comchst,chance);
     cout<<"----------------------------------------"<<endl;
     
     //Begin Playing
     do{
-        play(user,comp,prop,comchst,chance,cname);
-        automat(comp,user,prop,comchst,chance,cname);
+        play(user,comp,prop,comchst,chance);
+        automat(comp,user,prop,comchst,chance);
         cout<<"----------------------------------------"<<endl;
         cout<<"Would you like to continue playing the game? (Y/N)"<<endl;
         cin>>again;
@@ -85,33 +67,13 @@ int main(int argc, char** argv) {
     }while(toupper(again)=='Y'&&check.gameEnd(user)==false&&
             check.gameEnd(comp)==false);
     
-//    outBin(user,comp);
-    destroy(uname,cname);
     cout<<"Thank you for playing!!"<<endl;
     
     //Exit Stage Right!
     return 0;
 }
 
-void destroy(char *u,char *c){
-    delete []u;
-    delete []c;
-}
-
-//void outBin(Player &u,Player &c){
-//    //Output to Binary File
-//    fstream binFile;
-//    
-//    binFile.open("binFile.bin",ios::out|ios::binary);
-//    binFile.write(u.getName(),strlen(u.getName()));
-//    binFile.write(c.getName(),strlen(c.getName()));
-//    
-//    //Close Binary File
-//    binFile.close();
-//}
-
-void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx,
-        char *cname){
+void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     ChncCom temp;
     Rules check;
     Railroad RR;
@@ -134,15 +96,17 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx,
         cout<<endl<<"Just Visiting!!"<<endl;
     else if(prop.getcolr()=="tax"){
         c.setMony(c.getMony()-prop.getprce());
-        cout<<cname<<" just paid "<<prop.getname()<<" of "<<prop.getprce()<<endl;
+        cout<<"Your opponent just paid "<<prop.getname()<<" of "<<prop.getprce()<<endl;
     }
     else{
         if(u.findPrp(c.getSpot())==true){
             if(prop.getcolr()=="RR"){
                 c.payRent(RR.setrent(u,c.getSpot()));
                 cout<<endl;
-                cout<<"You already own "<<prop.getname()<<". "<<cname<<" pays ";
-                cout<<"you $"<<RR.setrent(u,c.getSpot())<<" of rent."<<endl;
+                cout<<"You already own "<<prop.getPos(u.getSpot());
+                cout<<" which is the "<<RR.getPos(u.getSpot())<<" railroad. ";
+                cout<<"Your opponent pays you $"<<RR.setrent(u,c.getSpot());
+                cout<<" of rent."<<endl;
                 u.setMony(u.getMony()+RR.setrent(u,c.getSpot()));
             }
             else if(prop.getcolr()=="Utility"){
@@ -153,15 +117,15 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx,
                 else number=2;
                 prop.utilRnt(number,total);
                 c.payRent(prop.getrent());
-                cout<<cname<<"'s new roll is "<<total<<endl;
-                cout<<"You already own "<<prop.getname()<<". "<<cname<<" pays ";
+                cout<<"Your opponent's new roll is "<<total<<endl;
+                cout<<"You already own "<<prop.getname()<<". Your opponent pays ";
                 cout<<"you $"<<prop.getrent()<<" of rent."<<endl;
                 u.setMony(u.getMony()+prop.getrent());
             }
             else{
                 c.payRent(prop.getrent());
                 cout<<endl;
-                cout<<"You already own "<<prop.getname()<<". "<<cname<<" pays ";
+                cout<<"You already own "<<prop.getname()<<". Your opponent pays ";
                 cout<<"you $"<<prop.getrent()<<" of rent."<<endl;
                 u.setMony(u.getMony()+prop.getrent());
             }
@@ -178,15 +142,14 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx,
     cout<<c;
 }
 
-void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx,
-        char *cname){    
+void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){    
     Rules check;
     
     check.restart(dieRoll(),c);
     prop.inform(c.getSpot(),u.getNHse());
-    cout<<cname<<" landed on "<<prop.getname()<<endl;
+    cout<<"Your opponent landed on "<<prop.getname()<<endl;
     
-    autochk(c,u,prop,comindx,chnindx,cname);
+    autochk(c,u,prop,comindx,chnindx);
 }
 
 void prcsOpt(int decide,Player &u,Property &prop){
@@ -261,8 +224,7 @@ int dieRoll(){
     return die1.getVal()+die2.getVal();
 }
 
-void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx,
-        char *cname){
+void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     Rules check;
     ChncCom temp;
     Railroad RR;
@@ -294,7 +256,8 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx,
             if(spot.getcolr()=="RR"){
                 u.payRent(RR.setrent(c,u.getSpot()));
                 cout<<endl;
-                cout<<cname<<" already owns "<<spot.getname()<<". You owe ";
+                cout<<"Your opponent already owns "<<spot.getPos(u.getSpot());
+                cout<<" which is the "<<RR.getPos(u.getSpot())<<" railroad. You owe ";
                 cout<<"them $"<<RR.setrent(c,u.getSpot())<<" of rent."<<endl;
                 c.setMony(c.getMony()+RR.setrent(c,u.getSpot()));
             }
@@ -306,14 +269,14 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx,
                 else number=2;
                 spot.utilRnt(number,total);
                 u.payRent(spot.getrent());
-                cout<<cname<<" already owns "<<spot.getname()<<". You owe ";
+                cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
                 cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                 c.setMony(c.getMony()+spot.getrent());
             }
             else{
                 u.payRent(spot.getrent());
                 cout<<endl;
-                cout<<cname<<" already owns "<<spot.getname()<<". You owe ";
+                cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
                 cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                 c.setMony(c.getMony()+spot.getrent());
                 
@@ -328,8 +291,7 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx,
     cout<<u;
 }
 
-void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx,
-        char *uname){  
+void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){  
     //Declare Menu Choice Variable
     Rules test;
     
@@ -338,7 +300,7 @@ void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx,
     cout<<"You landed on "<<spot.getname()<<endl;
     
     //Check for Special "Properties"
-    check(u,c,spot,comindx,chnindx,uname);
+    check(u,c,spot,comindx,chnindx);
 }
 
 void rdInstr(){
@@ -362,10 +324,17 @@ void rdInstr(){
         cout<<"Error. Cannot open file"<<endl;
 }
 
-char opening(char *u,char *c){
+char opening(Player &u,Player &c){
     //Declare Comparison Variables
     int comp,user;
     char seeIns;
+    
+    //Get & Set Names
+    cout<<"Hello! Welcome to the wonderful game of Monopoly!"<<endl;
+    cout<<"Before we begin, please enter your name. ";
+    u.setName();
+    cout<<"And also enter the name of your opponent. ";
+    c.setName();
     
     cout<<"Do you need to read the instructions? (Y/N)"<<endl;
     cin>>seeIns;
@@ -375,12 +344,12 @@ char opening(char *u,char *c){
     }
     cout<<"We will begin the game by rolling the dice to see who gets to go ";
     cout<<"first!"<<endl<<endl;
-    cout<<"Let's start with "<<c<<endl;
+    cout<<"Let's start with your opponent."<<endl;
     
     do{
         comp=dieRoll();
         cout<<"Your opponent rolls "<<comp<<endl<<endl;
-        cout<<"Now it's your turn "<<u<<endl;
+        cout<<"Now it's your turn."<<endl;
         user=dieRoll();
         cout<<"You roll "<<user<<endl<<endl;
 
@@ -390,13 +359,9 @@ char opening(char *u,char *c){
             return 'u';
         }
         else if(user<comp){
-            cout<<c<<" goes first."<<endl; 
+            cout<<"Your opponent goes first."<<endl; 
             return 'c';
         }
         else cout<<"It's a Tie! Let's try this again."<<endl;
     }while(comp==user);
-}
-
-void driver(const Property &prop){
-    cout<<"This is the "<<prop.getPos(SHORTLN)<<" railroad."<<endl;
 }

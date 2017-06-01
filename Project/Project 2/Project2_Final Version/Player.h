@@ -19,7 +19,7 @@ ostream &operator<<(ostream &,const Player &);
 
 class Player{
     private:
-        char *name;             //Player Name
+        string name;             //Player Name
         unsigned short nProps;  //Number of properties owned by player
         int *proprty;           //Array of property names owned by player
         int spot;               //Property Player has landed on
@@ -30,10 +30,7 @@ class Player{
         int money;              //Amount of money player has
     public:
         Player();
-        ~Player(){
-            delete []name;
-            delete []proprty;
-        };
+        ~Player(){delete []proprty;};
         void setName();
         void setMony(int);
         void *setPrps();
@@ -42,7 +39,7 @@ class Player{
         void setNHse();
         void setNHtl(Property &);
         void payRent(int);
-        char *getName()const;
+        string getName()const;
         int getMony()const;
         unsigned short getNPrp()const;
         int getSpot()const;

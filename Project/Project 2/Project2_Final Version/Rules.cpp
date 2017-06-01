@@ -101,17 +101,13 @@ void Rules::restart(int num,Player &player){
 
 bool Rules::gameEnd(Player &player){
     bool status=false;
-    char *name=new char[strlen(player.getName())];
     
     if(player.getMony()<0){
         status=true;
-        cout<<"Oh no! "<<name<<" is in debt!"<<endl;
+        cout<<"Oh no! "<<player.getName()<<" is in debt!"<<endl;
         cout<<"Sorry. Maybe next time you will make better decisions.";
         cout<<"The game is over!! We have a winner!"<<endl;
     }
-    
-    //Avoid Memory Leak!
-    delete []name;
     
     return status;    
 }

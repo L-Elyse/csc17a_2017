@@ -16,7 +16,7 @@ using namespace std;
 
 
 Player::Player(){
-    name=new char[50];
+    name="";
     money=1500;                
     nProps=0;                  
     proprty=new int[40];   
@@ -29,7 +29,7 @@ Player::Player(){
 }
 
 void Player::setName(){
-    cin.getline(name,50);
+    getline(cin,name);
 }
 
 void Player::setMony(int mon){
@@ -106,7 +106,7 @@ void Player::payRent(int rent){
     money-=rent;
 }
 
-char *Player::getName() const{
+string Player::getName() const{
     return name;
 }
 
