@@ -6,7 +6,8 @@
  */
 
 #include <iostream>
-#include <string>
+#include <cctype>
+#include <cstring>
 using namespace std;
 
 #include "Player.h"
@@ -14,6 +15,7 @@ using namespace std;
 
 
 Player::Player(){
+    name=new char[50];
     money=1500;                
     nProps=0;                  
     proprty=new int[40];   
@@ -25,12 +27,16 @@ Player::Player(){
     nHotels=0;                 
 }
 
+void Player::setName(){
+    cin.getline(name,50);
+}
+
 void Player::setMony(int mon){
     money=mon;
 }
 
 void *Player::setPrps(){
-    proprty[nProps]=spot;
+    *(proprty+nProps)=spot;
     nProps++;
 }
 
@@ -46,7 +52,7 @@ void Player::setNHse(){
     Property prop;
     int colors[10];
     int count=0;
-    bool add=true;
+    char add;
     int numHse;
     
     for(int i=0;i<10;i++){
@@ -55,18 +61,18 @@ void Player::setNHse(){
             if(prop.getcolr()==prop.colList(i))
                 count++;
         }
-        colors[i]=count;
+        *(colors+i)=count;
         count=0;
     }
     cout<<"You currently own: "<<endl;
     for(int i=0;i<10;i++){
-        cout<<colors[i]<<" "<<prop.colList(i)<<" contains ";
+        cout<<*(colors+i)<<" "<<prop.colList(i)<<" contains ";
         cout<<prop.setcMax(prop.colList(i))<<" total properties"<<endl;
-        if(colors[i]==prop.setcMax(prop.colList(i))){
+        if(*(colors+i)==prop.setcMax(prop.colList(i))){
             cout<<"Would you like to add houses here? The cost per house is $";
             cout<<prop.getHseC()<<endl;
             cin>>add;
-            if(add==true){
+            if(toupper(add)=='Y'){
                 cout<<"How many would you like to purchase? ";
                 cin>>numHse;
                 nHouses+=numHse;
@@ -97,6 +103,10 @@ void Player::setNHtl(Property &prop){
 
 void Player::payRent(int rent){
     money-=rent;
+}
+
+char *Player::getName() const{
+    return name;
 }
 
 int Player::getMony()const{

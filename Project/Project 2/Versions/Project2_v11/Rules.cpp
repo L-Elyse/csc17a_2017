@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <cctype>
 using namespace std;
 
 #include "Rules.h"
@@ -14,18 +15,20 @@ using namespace std;
 
 void Rules::Go2Jail(Player &player){
     Die die1,die2;
-    bool use=true,choice=true;
+    char use,choice;
     int count=0;
     
     if(player.outJail>0){
-        cout<<"Would you like to use your Get out of Jail Free card?";
+        cout<<"Would you like to use your Get out of Jail Free card? (Y/N)";
         cin>>use;
-        if(use)
+        if(toupper(use)=='Y'){
             player.outJail=0;
+            cout<<"Get Out of Jail Free Card used!"<<endl;
+        }
         else{
-            cout<<"Would you like to pay the $50 fine now?";
+            cout<<"Would you like to pay the $50 fine now? (Y/N)";
             cin>>choice;
-            if(choice){
+            if(toupper(choice)=='Y'){
                 player.money-=50;
             }
             else{

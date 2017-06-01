@@ -11,6 +11,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <cctype>
+#include <fstream>
 using namespace std;
 
 //User Libraries
@@ -19,9 +21,11 @@ using namespace std;
 #include "Player.h"
 #include "Property.h"
 #include "Railroad.h"
+#include "Rules.h"
 
 //Function Prototypes
 char opening();
+void rdInstr();
 int dieRoll();
 void play(Player &,Player &,Property &,short &,short &);
 void check(Player &,Player &,Property &,short &,short &);
@@ -29,6 +33,7 @@ void Menu(Property &,Player &);
 void prcsOpt(int,Player &,Property &);
 void automat(Player &,Player &,Property &,short &,short &);
 void autochk(Player &,Player &,Property &,short &,short &);
+int validte(int);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -39,7 +44,7 @@ int main(int argc, char** argv) {
     Player user, comp;
     Property prop;
     short chance=1,comchst=1;
-    bool again=true;  //Maybe make a char instead to use cctype!!
+    char again;
     
     //Begin to see who goes first
     char first;
@@ -53,9 +58,9 @@ int main(int argc, char** argv) {
         play(user,comp,prop,chance,comchst);
         automat(comp,user,prop,chance,comchst);
         cout<<"----------------------------------------"<<endl;
-        cout<<"Would you like to continue playing the game?"<<endl;
+        cout<<"Would you like to continue playing the game? (Y/N)"<<endl;
         cin>>again;
-    }while(again==true);
+    }while(toupper(again)=='Y');
     
     cout<<"Thank you for playing!!"<<endl;
     
@@ -83,10 +88,10 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     else if(prop.getname()=="Go To Jail")
         check.cGoJail(c); 
     else if(prop.getcolr()=="")
-        cout<<"Just Visiting!!"<<endl;
+        cout<<endl<<"Just Visiting!!"<<endl;
     else if(prop.getcolr()=="tax"){
         c.setMony(c.getMony()-prop.getprce());
-        cout<<"Opponent just paid "<<prop.getname()<<endl;
+        cout<<"Opponent just paid "<<prop.getname()<<" of "<<prop.getprce()<<endl;
     }
     else{
         if(u.findPrp(c.getSpot())==true){
@@ -140,7 +145,7 @@ void automat(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
 }
 
 void prcsOpt(int decide,Player &u,Property &prop){
-    bool endturn=true;
+    char endturn;
     
     //Process the Menu Decision
     if(decide==1){
@@ -163,8 +168,18 @@ void prcsOpt(int decide,Player &u,Property &prop){
     
     cout<<"Would you like to end turn? ";
     cin>>endturn;
-    if(endturn==false)
+    if(toupper(endturn)=='N')
         Menu(prop,u);
+}
+
+int validte(int option){
+    cin>>option;          //Overload the >> operator to display player info
+    if(option<1||option>4){
+        string except = "ERROR: That is not a valid entry!\n";
+        throw except;
+    }
+    else
+        return option;
 }
 
 void Menu(Property &prop,Player &u){
@@ -177,9 +192,15 @@ void Menu(Property &prop,Player &u){
     cout<<"3. Build a House."<<endl;
     cout<<"4. Build a Hotel."<<endl;
     
-    cin>>choice;       //Overload the >> operator to display player info
-    //Validate with try/catch
-    prcsOpt(choice,u,prop);
+    try{
+        choice=validte(choice);
+        prcsOpt(choice,u,prop);
+    }
+    catch(string except){
+        cout<<except;
+        cout<<"Please enter a valid Menu option. ";
+        cin>>choice;
+    }      
 }
 
 int dieRoll(){
@@ -217,10 +238,10 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
         check.Go2Jail(u);
     }
     else if(spot.getcolr()=="")
-        cout<<"Just Visiting!!"<<endl;
+        cout<<endl<<"Just Visiting!!"<<endl;
     else if(spot.getcolr()=="tax"){
         u.setMony(u.getMony()-spot.getprce());
-        cout<<"Opponent just paid "<<spot.getname()<<endl;
+        cout<<"You just paid "<<spot.getname()<<" of "<<spot.getprce()<<endl;
     }
     else{
         if(c.findPrp(u.getSpot())==true){
@@ -271,14 +292,39 @@ void play(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     check(u,c,spot,comindx,chnindx);
 }
 
+void rdInstr(){
+    fstream instrct;
+    string lines;
+    
+    //Open the file
+    instrct.open("Instructions.txt",ios::in);
+    
+    if(instrct){
+        getline(instrct,lines);
+        while(instrct){
+            cout<<lines<<endl;          
+            getline(instrct,lines);
+        }
+        
+        //Close the file
+        instrct.close();
+    }
+    else
+        cout<<"Error. Cannot open file"<<endl;
+}
+
 char opening(){
     //Declare Comparison Variables
     int comp,user;
+    char seeIns;
     
     cout<<"Hello! Welcome to the wonderful game of Monopoly!"<<endl;
-    cout<<"Before we begin, do you need to read the instructions?"<<endl;
-    //Create a boolean input where if the answer is affirmative, output the
-    //instructions, which will be read in from a file & validate with t/c
+    cout<<"Before we begin, do you need to read the instructions? (Y/N)"<<endl;
+    cin>>seeIns;
+    if(toupper(seeIns)=='Y'){
+        rdInstr();
+        cout<<endl;
+    }
     cout<<"We will begin the game by rolling the dice to see who gets to go ";
     cout<<"first!"<<endl<<endl;
     cout<<"Let's start with your opponent."<<endl;

@@ -188,7 +188,6 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
             case 14:{
                 message="Advance to Go. Collect $200.";
                 player.setNew(GO);
-                player.money+=200;
                 break;
             }
             case 15:{
