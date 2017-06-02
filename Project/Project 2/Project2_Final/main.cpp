@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
     Player user, comp;
     Property prop;
     Rules check;
-    short chance=16,comchst=16;
+    short chance=1,comchst=1;
     char again;
     
     //Begin to see who goes first
@@ -323,6 +323,7 @@ void rdInstr(){
             cout<<lines<<endl;          
             getline(instrct,lines);
         }
+        cout<<endl;
         
         //Close the file
         instrct.close();

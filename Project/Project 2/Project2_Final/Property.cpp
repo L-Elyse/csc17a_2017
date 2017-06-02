@@ -6,7 +6,7 @@
  */
 
 #include "Property.h"
-#include "Board.h"
+#include "Board.h" 
 
 Property::Property(){
     rent=0;

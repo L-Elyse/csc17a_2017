@@ -11,7 +11,7 @@ using namespace std;
 
 #include "Rules.h"
 #include "Player.h"
-#include "Die.h"
+#include "Die.h" 
 
 void Rules::Go2Jail(Player &player){
     Die die1,die2;
