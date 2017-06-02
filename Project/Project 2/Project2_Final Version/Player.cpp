@@ -8,7 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cctype>
-#include <cstring>
+#include <string>
 using namespace std;
 
 #include "Player.h"
@@ -51,12 +51,12 @@ void Player::setSpot(int s){
 
 void Player::setNHse(){
     Property prop;
-    int colors[10];
+    int colors[8];
     int count=0;
     char add;
     int numHse;
     
-    for(int i=0;i<10;i++){
+    for(int i=0;i<8;i++){
         for(int j=0;j<nProps;j++){
             prop.inform(*(proprty+j),nHouses);
             if(prop.getcolr()==prop.colList(i))
@@ -66,7 +66,7 @@ void Player::setNHse(){
         count=0;
     }
     cout<<"You currently own: "<<endl;
-    for(int i=0;i<10;i++){
+    for(int i=0;i<8;i++){
         cout<<*(colors+i)<<" "<<prop.colList(i)<<" contains ";
         cout<<prop.setcMax(prop.colList(i))<<" total properties"<<endl;
         if(*(colors+i)==prop.setcMax(prop.colList(i))){

@@ -308,7 +308,7 @@ void Property::inform(int title,int number){
             else rent=1150;
             hseCost=150;
             break;
-        case WATERWK: //FLAG!!
+        case WATERWK:
             name="Water Works";
             price=150;
             color="Utility";
