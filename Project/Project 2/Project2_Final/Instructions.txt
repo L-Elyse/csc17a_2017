@@ -1,0 +1,18 @@
+Object of the Game:
+Typically, the object of the game is to become the richest person by buying, renting out and selling/trading
+property. However, the object of THIS game is to not be in debt! The first person to have a negative balance
+in their account is the loser. You start with a balance of $1500. Don't blow through it!!!!
+
+Instructions:
+Throw the dice and decide if you would like to purchase the property you land on or simply visit. If you land
+on a property that is already owned by your opponent, you must pay them rent.
+
+If you land on a Chance or Community Chest space, you must read the prompt and follow the instructions given.
+
+Purchasing Houses:
+Houses can only be purchased once a player owns all the properties belonging to AT LEAST one color group. Usually,
+after purchasing houses, the rent for the property owning the houses goes up. However, in THIS game, if a player
+purchases houses, the rent on ALL of THEIR properties goes up.
+
+Additional Instructions:
+Have fun playing the game!!!!!

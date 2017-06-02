@@ -26,7 +26,7 @@ void Rules::Go2Jail(Player &player){
             cout<<"Get Out of Jail Free Card used!"<<endl;
         }
         else{
-            cout<<"Would you like to pay the $50 fine now? (Y/N)";
+            cout<<"Would you like to pay the $50 fine now? (Y/N) ";
             cin>>choice;
             if(toupper(choice)=='Y'){
                 player.money-=50;
@@ -44,7 +44,7 @@ void Rules::Go2Jail(Player &player){
         }
     }
     else{
-        cout<<"Would you like to pay the $50 fine now?";
+        cout<<"Would you like to pay the $50 fine now? (Y/N) ";
         cin>>choice;
         if(toupper(choice)=='N'){
             do{
@@ -93,9 +93,15 @@ void Rules::restart(int num,Player &player){
         extra=(num-leftovr)-1;
         player.setNew(extra);
         player.money+=200;
+        cout<<player.getName()<<" just passed GO, and collected $200."<<endl;
     }
     else
         player.setSpot(num);
+}
+
+void Rules::indxset(short &index){
+    if(index>16)
+        index=1;
 }
 
 bool Rules::gameEnd(Player &player){

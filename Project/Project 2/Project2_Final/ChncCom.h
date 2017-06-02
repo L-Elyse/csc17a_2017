@@ -7,7 +7,6 @@
 
 #ifndef CHNCCOM_H
 #define CHNCCOM_H
-#include "Property.h"
 
 #include <string>
 using namespace std;
@@ -15,7 +14,7 @@ using namespace std;
 class Player;
 class Rules;
 
-class ChncCom:public Property{
+class ChncCom{
     private:
         string message;
     public:

@@ -30,7 +30,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
             case 1:{
                 message="Advance token to the nearest Railroad and pay owner "
                         "TWICE the rental to which he/she is otherwise "
-                        "entitled. If Railroad is UNOWNED, you may buy it "
+                        "entitled. \nIf Railroad is UNOWNED, you may buy it "
                         "from the Bank.";
                 if(player.getSpot()==CHANCE1)
                     player.setNew(PENNRR);
@@ -39,6 +39,8 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 else if(player.getSpot()==CHANCE3){
                     player.setNew(READRR);
                     player.money+=200;
+                    cout<<player.getName()<<" just passed GO, and collected ";
+                    cout<<"$200."<<endl;
                 }
                 if(opp.findPrp(player.getSpot())==true){
                     player.money-=(RR.setrent(opp,player.spot)*2);
@@ -62,12 +64,14 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 message="Take a ride on the Reading. If you pass Go, collect "
                         "$200.";
                 player.setNew(READRR);
-                player.money+=200;                //THIS MAY BE A PROBLEM!
+                player.money+=200;
+                cout<<player.getName()<<" just passed GO, and collected ";
+                cout<<"$200."<<endl;
                 if(opp.findPrp(player.getSpot())==true){
                     player.payRent(RR.setrent(opp,player.spot));
                     cout<<endl;
                     cout<<"Your opponent already owns this railroad. You owe ";
-                    cout<<"them $"<<RR.setrent(opp,player.spot)<<" of rent."<<endl;
+                    cout<<"them $"<<RR.setrent(opp,player.spot)<<" of rent.\n";
                     opp.setMony(opp.getMony()+RR.setrent(opp,player.spot));
                 }
                 else if(player.findPrp(player.getSpot())==true)
@@ -80,8 +84,11 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
             }
             case 4:{
                 message="Advance to Illinois Ave.";
-                if(player.getSpot()==CHANCE3)
+                if(player.getSpot()==CHANCE3){
                     player.money+=200;
+                    cout<<player.getName()<<" just passed GO, and collected ";
+                    cout<<"$200."<<endl;
+                }
                 player.setNew(ILLNOIS);
                 if(opp.findPrp(player.getSpot())==true){
                     spot.inform(player.getSpot(),opp.nHouses);
@@ -107,7 +114,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
             case 6:{
                 message="Advance token to the nearest Railroad and pay owner "
                         "TWICE the rental to which he/she is otherwise "
-                        "entitled. If Railroad is UNOWNED, you may buy it "
+                        "entitled. \nIf Railroad is UNOWNED, you may buy it "
                         "from the Bank.";
                 if(player.getSpot()==CHANCE1)
                     player.setNew(PENNRR);
@@ -116,6 +123,8 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 else if(player.getSpot()==CHANCE3){
                     player.setNew(READRR);
                     player.money+=200;
+                    cout<<player.getName()<<" just passed GO, and collected ";
+                    cout<<"$200."<<endl;
                 }
                 if(opp.findPrp(player.getSpot())==true){
                     player.money-=(RR.setrent(opp,player.spot)*2);
@@ -167,6 +176,8 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                         "$200.";
                 if(player.getSpot()==CHANCE2||player.getSpot()==CHANCE3){
                     player.money+=200;
+                    cout<<player.getName()<<" just passed GO, and collected ";
+                    cout<<"$200."<<endl;
                 }
                 player.setNew(STCHRLS);
                 if(opp.findPrp(player.getSpot())==true){
@@ -212,6 +223,9 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
             case 14:{
                 message="Advance to Go. Collect $200.";
                 player.setNew(GO);
+                player.money+=200;
+                cout<<player.getName()<<" just passed GO, and collected ";
+                cout<<"$200."<<endl;
                 break;
             }
             case 15:{
@@ -221,8 +235,8 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
-                    cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
+                    cout<<"Your opponent already owns "<<spot.getname();
+                    cout<<". You owe them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
                 else if(player.findPrp(player.getSpot())==true)
@@ -245,8 +259,11 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 //Advance Procedure
                 if(player.getSpot()==CHANCE1||player.getSpot()==CHANCE3){
                     player.setNew(ELECTRC);
-                    if(player.getSpot()==CHANCE3)
+                    if(player.getSpot()==CHANCE3){
                         player.money+=200;
+                        cout<<player.getName()<<" just passed GO, and ";
+                        cout<<"collected $200."<<endl;
+                    }
                 }
                 else
                     player.setNew(WATERWK);
@@ -287,6 +304,8 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 message="Advance to Go. Collect $200.";
                 player.setNew(GO);
                 player.money+=200;
+                cout<<player.getName()<<" just passed GO, and collected ";
+                cout<<"$200."<<endl;
                 break;
             }
             case 4:{

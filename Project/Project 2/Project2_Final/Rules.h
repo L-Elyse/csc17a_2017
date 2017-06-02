@@ -19,6 +19,7 @@ class Rules{
         void Go2Jail(Player &);
         void cGoJail(Player &);
         void restart(int,Player &);  //Friend 
+        void indxset(short &);
         bool gameEnd(Player &);
         friend void ChncCom::setMess(unsigned short,short,Player &,Player &,
             Rules &);

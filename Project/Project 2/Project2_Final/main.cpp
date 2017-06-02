@@ -1,7 +1,7 @@
 /* 
  * File:   main.cpp
  * Author: Laurie Guimont
- * Created on May 28, 2017, 11:15 PM
+ * Created on June 2, 2017, 12:15 AM
  * Purpose: Monopoly Game
  */
 
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
     Player user, comp;
     Property prop;
     Rules check;
-    short chance=1,comchst=1;
+    short chance=16,comchst=16;
     char again;
     
     //Begin to see who goes first
@@ -61,8 +61,6 @@ int main(int argc, char** argv) {
         cout<<"Would you like to continue playing the game? (Y/N)"<<endl;
         cin>>again;
         cout<<"----------------------------------------"<<endl;
-        check.gameEnd(user);
-        check.gameEnd(comp);
     }while(toupper(again)=='Y'&&check.gameEnd(user)==false&&
             check.gameEnd(comp)==false);
     
@@ -81,6 +79,7 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
         temp.setMess(1,chnindx,c,u,check);
         cout<<endl<<temp.getMess()<<endl;
         chnindx++;
+        check.indxset(chnindx);
         if(c.getSpot()==30)
             check.cGoJail(c);
     }
@@ -88,6 +87,9 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
         temp.setMess(2,comindx,c,u,check);
         cout<<endl<<temp.getMess()<<endl;
         comindx++;
+        check.indxset(comindx);
+        if(c.getSpot()==30)
+            check.Go2Jail(c);
     }
     else if(prop.getname()=="Go To Jail")
         check.cGoJail(c); 
@@ -95,15 +97,16 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
         cout<<"Just Visiting!!"<<endl;
     else if(prop.getcolr()=="tax"){
         c.setMony(c.getMony()-prop.getprce());
-        cout<<c.getName()<<" just paid "<<prop.getname()<<" of "<<prop.getprce()<<endl;
+        cout<<c.getName()<<" just paid "<<prop.getname()<<" of $";
+        cout<<prop.getprce()<<endl;
     }
     else{
         if(u.findPrp(c.getSpot())==true){
             if(prop.getcolr()=="RR"){
                 c.payRent(RR.setrent(u,c.getSpot()));
                 cout<<endl;
-                cout<<"You already own "<<prop.getPos(u.getSpot());
-                cout<<" which is the "<<RR.getPos(u.getSpot())<<" railroad. ";
+                cout<<"You already own "<<prop.getPos(c.getSpot());
+                cout<<" which is the "<<RR.getPos(c.getSpot())<<" railroad. ";
                 cout<<c.getName()<<" pays you $"<<RR.setrent(u,c.getSpot());
                 cout<<" of rent."<<endl;
                 u.setMony(u.getMony()+RR.setrent(u,c.getSpot()));
@@ -117,15 +120,15 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
                 prop.utilRnt(number,total);
                 c.payRent(prop.getrent());
                 cout<<c.getName()<<"'s new roll is "<<total<<endl;
-                cout<<"You already own "<<prop.getname()<<". "<<c.getName()<<" pays ";
-                cout<<"you $"<<prop.getrent()<<" of rent."<<endl;
+                cout<<"You already own "<<prop.getname()<<". "<<c.getName();
+                cout<<" pays you $"<<prop.getrent()<<" of rent."<<endl;
                 u.setMony(u.getMony()+prop.getrent());
             }
             else{
                 c.payRent(prop.getrent());
                 cout<<endl;
-                cout<<"You already own "<<prop.getname()<<". "<<c.getName()<<" pays ";
-                cout<<"you $"<<prop.getrent()<<" of rent."<<endl;
+                cout<<"You already own "<<prop.getname()<<". "<<c.getName();
+                cout<<" pays you $"<<prop.getrent()<<" of rent."<<endl;
                 u.setMony(u.getMony()+prop.getrent());
             }
         }
@@ -233,6 +236,7 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
         temp.setMess(1,chnindx,u,c,check);
         cout<<endl<<temp.getMess()<<endl;
         chnindx++;  
+        check.indxset(chnindx);
         if(u.getSpot()==30)
             check.Go2Jail(u);
     }
@@ -240,6 +244,9 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
         temp.setMess(2,comindx,u,c,check);
         cout<<endl<<temp.getMess()<<endl;
         comindx++;
+        check.indxset(comindx);
+        if(u.getSpot()==30)
+            check.Go2Jail(u);
     }
     else if(spot.getname()=="Go To Jail"){
         check.Go2Jail(u);
@@ -248,7 +255,7 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
         cout<<"Just Visiting!!"<<endl;
     else if(spot.getcolr()=="tax"){
         u.setMony(u.getMony()-spot.getprce());
-        cout<<"You just paid "<<spot.getname()<<" of "<<spot.getprce()<<endl;
+        cout<<"You just paid "<<spot.getname()<<" of $"<<spot.getprce()<<endl;
     }
     else{
         if(c.findPrp(u.getSpot())==true){
@@ -256,8 +263,9 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
                 u.payRent(RR.setrent(c,u.getSpot()));
                 cout<<endl;
                 cout<<c.getName()<<" already owns "<<spot.getPos(u.getSpot());
-                cout<<" which is the "<<RR.getPos(u.getSpot())<<" railroad. You owe ";
-                cout<<"them $"<<RR.setrent(c,u.getSpot())<<" of rent."<<endl;
+                cout<<" which is the "<<RR.getPos(u.getSpot())<<" railroad. ";
+                cout<<"You owe them $"<<RR.setrent(c,u.getSpot());
+                cout<<" of rent."<<endl;
                 c.setMony(c.getMony()+RR.setrent(c,u.getSpot()));
             }
             else if(spot.getcolr()=="Utility"){
@@ -268,15 +276,15 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
                 else number=2;
                 spot.utilRnt(number,total);
                 u.payRent(spot.getrent());
-                cout<<c.getName()<<" already owns "<<spot.getname()<<". You owe ";
-                cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
+                cout<<c.getName()<<" already owns "<<spot.getname()<<". ";
+                cout<<"You owe them $"<<spot.getrent()<<" of rent."<<endl;
                 c.setMony(c.getMony()+spot.getrent());
             }
             else{
                 u.payRent(spot.getrent());
                 cout<<endl;
-                cout<<c.getName()<<" already owns "<<spot.getname()<<". You owe ";
-                cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
+                cout<<c.getName()<<" already owns "<<spot.getname()<<". ";
+                cout<<"You owe them $"<<spot.getrent()<<" of rent."<<endl;
                 c.setMony(c.getMony()+spot.getrent());
                 
             }
