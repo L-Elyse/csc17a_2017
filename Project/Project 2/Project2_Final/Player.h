@@ -19,7 +19,7 @@ ostream &operator<<(ostream &,const Player &);
 
 class Player{
     private:
-        string name;             //Player Name
+        string name;            //Player Name
         unsigned short nProps;  //Number of properties owned by player
         int *proprty;           //Array of property names owned by player
         int spot;               //Property Player has landed on
@@ -33,7 +33,7 @@ class Player{
         ~Player(){delete []proprty;};
         void setName();
         void setMony(int);
-        void *setPrps();
+        void setPrps();
         void setNew(int);
         void setSpot(int);
         void setNHse();
@@ -43,13 +43,14 @@ class Player{
         int getMony()const;
         unsigned short getNPrp()const;
         int getSpot()const;
-        void *getPrps();
+        void getPrps();
         bool findPrp(int);
         int getNHse()const;
         int getNHtl()const;
         
         //Friends
-        friend void ChncCom::setMess(unsigned short,short,Player &,Player &,Rules &);
+        friend void ChncCom::setMess(unsigned short,short,Player &,Player &,
+            Rules &);
         friend void Rules::Go2Jail(Player &);
         friend void Rules::cGoJail(Player &);
         friend void Rules::restart(int,Player &);

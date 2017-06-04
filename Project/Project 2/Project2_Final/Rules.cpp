@@ -35,7 +35,8 @@ void Rules::Go2Jail(Player &player){
                 do{
                     die1.roll();
                     die2.roll();
-                    cout<<"Die 1: "<<die1.getVal()<<"  Die 2: "<<die2.getVal()<<"\n";
+                    cout<<"Die 1: "<<die1.getVal()<<"  Die 2: "<<die2.getVal();
+                    cout<<endl;
                     count++;
                 }while(die1.getVal()!=die2.getVal()&&count<3);
                 if(count=3&&die1.getVal()!=die2.getVal())
@@ -55,12 +56,12 @@ void Rules::Go2Jail(Player &player){
             }while(die1.getVal()!=die2.getVal()&&count<3);
             if(count=3&&die1.getVal()!=die2.getVal()){
                 player.money-=50;
-                cout<<"Fine paid!"<<endl;
+                cout<<"$50 fine paid!"<<endl;
             }
         }
         else{
             player.money-=50;
-            cout<<"Fine paid!"<<endl;
+            cout<<"$50 fine paid!"<<endl;
         }
     }
     player.setNew(JAIL);
@@ -81,7 +82,7 @@ void Rules::cGoJail(Player &comp){
         }while(die1.getVal()!=die2.getVal()&&count<3);
         if(count=3&&die1.getVal()!=die2.getVal()){
             comp.money-=50;
-            cout<<"Fine paid!"<<endl;
+            cout<<"$50 fine paid!"<<endl;
         }
     }
     comp.setNew(JAIL);
@@ -110,7 +111,7 @@ bool Rules::gameEnd(Player &player){
     if(player.getMony()<0){
         status=true;
         cout<<"Oh no! "<<player.getName()<<" is in debt!"<<endl;
-        cout<<"Sorry. Maybe next time you will make better decisions.";
+        cout<<"Sorry. Maybe next time you will make better decisions. ";
         cout<<"The game is over!! We have a winner!"<<endl;
     }
     

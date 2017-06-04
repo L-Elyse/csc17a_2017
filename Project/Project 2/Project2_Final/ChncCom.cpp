@@ -44,13 +44,14 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                 }
                 if(opp.findPrp(player.getSpot())==true){
                     player.money-=(RR.setrent(opp,player.spot)*2);
-                    cout<<"Charged: "<<RR.setrent(opp,player.spot);
+                    cout<<"Charged: $"<<RR.setrent(opp,player.spot)*2<<endl;
                     opp.money+=(RR.setrent(opp,player.spot)*2);
                 }
                 else if(opp.findPrp(player.getSpot())!=true&&
                         player.findPrp(player.getSpot())!=true){
                     player.setPrps();
                     player.money-=200;
+                    cout<<"This was bought!"<<endl;
                 }
                 break;            
             }
@@ -75,10 +76,11 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     opp.setMony(opp.getMony()+RR.setrent(opp,player.spot));
                 }
                 else if(player.findPrp(player.getSpot())==true)
-                    cout<<"You already own "<<spot.getname()<<endl;
+                    cout<<"You already own this railroad"<<endl;
                 else{
                     player.money-=200;
                     player.setPrps();
+                    cout<<"Railroad bought!"<<endl;
                 }
                 break;
             }
@@ -94,15 +96,16 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
-                    cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
+                    cout<<"Your opponent already owns Illinois Avenue. You ";
+                    cout<<"owe them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
                 else if(player.findPrp(player.getSpot())==true)
-                    cout<<"You already own "<<spot.getname()<<endl;
+                    cout<<"You already own Illinois Avenue."<<endl;
                 else{
                     player.money-=240;
                     player.setPrps();
+                    cout<<"Bought!"<<endl;
                 }
                 break;
             }
@@ -135,6 +138,7 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                         player.findPrp(player.getSpot())!=true){
                     player.setPrps();
                     player.money-=200;
+                    cout<<"This was bought!"<<endl;
                 }
                 break;
             }
@@ -146,15 +150,16 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
+                    cout<<"Your opponent already owns Boardwalk. You owe ";
                     cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
                 else if(player.findPrp(player.getSpot())==true)
-                    cout<<"You already own "<<spot.getname()<<endl;
+                    cout<<"You already own Boardwalk."<<endl;
                 else{
                     player.money-=400;
                     player.setPrps();
+                    cout<<"Bought!"<<endl;
                 }
                 break;
             }
@@ -184,15 +189,16 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<"Your opponent already owns "<<spot.getname()<<". You owe ";
+                    cout<<"Your opponent already owns this property. You owe ";
                     cout<<"them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
                 else if(player.findPrp(player.getSpot())==true)
-                    cout<<"You already own "<<spot.getname()<<endl;
+                    cout<<"You already own this property."<<endl;
                 else{
                     player.money-=140;
                     player.setPrps();
+                    cout<<"Bought!"<<endl;
                 }
                 break;
             }
@@ -235,15 +241,16 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.inform(player.getSpot(),opp.nHouses);
                     player.payRent(spot.getrent());
                     cout<<endl;
-                    cout<<"Your opponent already owns "<<spot.getname();
+                    cout<<"Your opponent already owns this property";
                     cout<<". You owe them $"<<spot.getrent()<<" of rent."<<endl;
                     player.setMony(player.getMony()+spot.getrent());
                 }
                 else if(player.findPrp(player.getSpot())==true)
-                    cout<<"You already own "<<spot.getname()<<endl;
+                    cout<<"You already own this property."<<endl;
                 else{
                     player.money-=spot.getprce();
                     player.setPrps();
+                    cout<<"Bought property!"<<endl;
                 }
                 break;
             }
@@ -274,16 +281,17 @@ void ChncCom::setMess(unsigned short pick,short index,Player &player,
                     spot.utilRnt(number,total);
                     player.payRent(spot.getrent());
                     cout<<"Rolled: "<<total<<endl;
-                    cout<<"Charged: $"<<spot.getrent();
+                    cout<<"Charged: $"<<spot.getrent()<<endl;
                     opp.money+=spot.getrent();
                 }
                 else if(opp.findPrp(player.getSpot())!=true&&
                     player.findPrp(player.getSpot())!=true){
                     player.setPrps();
                     player.money-=150;
+                    cout<<"Bought utility!"<<endl;
                 }
                 else
-                   cout<<"You already own "<<spot.getname()<<endl; 
+                   cout<<"You already own this."<<endl; 
                 break;
             }
         }

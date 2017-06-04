@@ -13,7 +13,7 @@ using namespace std;
 
 class Die{
     private:
-        int value;
+        int value;                 //Value shown on one die
     public:
         Die(){
             value=0;

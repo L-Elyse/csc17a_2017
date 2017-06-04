@@ -39,24 +39,24 @@ int main(int argc, char** argv) {
     //Set the Random Number Seed
     srand(static_cast<unsigned int>(time(0)));
     
-    //Instantiate Players, Property Object & Local Reference Variables
+    //Instantiate Players, Property & Rules Object, & Local Reference Variables
     Player user, comp;
     Property prop;
     Rules check;
-    short chance=1,comchst=1;
-    char again;
+    short chance=1,comchst=1;       //Chance/Community Chest card index
+    char again;                     //Continue Play option
     
     //Begin to see who goes first
     char first;
     first=opening(user,comp);
     if(first=='c') 
-        automat(comp,user,prop,comchst,chance);
+        automat(comp,user,prop,comchst,chance);        //Comp's Turn
     cout<<"----------------------------------------"<<endl;
     
     //Begin Playing
     do{
-        play(user,comp,prop,comchst,chance);
-        automat(comp,user,prop,comchst,chance);
+        play(user,comp,prop,comchst,chance);            //Player's Turn
+        automat(comp,user,prop,comchst,chance);         //Comp's Turn
         cout<<"----------------------------------------"<<endl;
         cout<<"Would you like to continue playing the game? (Y/N)"<<endl;
         cin>>again;
@@ -77,7 +77,7 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     
     if(prop.getname()=="Chance"){
         temp.setMess(1,chnindx,c,u,check);
-        cout<<endl<<temp.getMess()<<endl;
+        cout<<temp.getMess()<<endl;
         chnindx++;
         check.indxset(chnindx);
         if(c.getSpot()==30)
@@ -85,7 +85,7 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
     }
     else if(prop.getname()=="Community Chest"){
         temp.setMess(2,comindx,c,u,check);
-        cout<<endl<<temp.getMess()<<endl;
+        cout<<temp.getMess()<<endl;
         comindx++;
         check.indxset(comindx);
         if(c.getSpot()==30)
@@ -104,7 +104,6 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
         if(u.findPrp(c.getSpot())==true){
             if(prop.getcolr()=="RR"){
                 c.payRent(RR.setrent(u,c.getSpot()));
-                cout<<endl;
                 cout<<"You already own "<<prop.getPos(c.getSpot());
                 cout<<" which is the "<<RR.getPos(c.getSpot())<<" railroad. ";
                 cout<<c.getName()<<" pays you $"<<RR.setrent(u,c.getSpot());
@@ -126,7 +125,6 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
             }
             else{
                 c.payRent(prop.getrent());
-                cout<<endl;
                 cout<<"You already own "<<prop.getname()<<". "<<c.getName();
                 cout<<" pays you $"<<prop.getrent()<<" of rent."<<endl;
                 u.setMony(u.getMony()+prop.getrent());
@@ -137,7 +135,7 @@ void autochk(Player &c,Player &u,Property &prop,short &comindx,short &chnindx){
         else{
             int total=c.getMony()-prop.getprce();
             c.setMony(total);
-            cout<<" and bought it for $"<<prop.getprce()<<endl;
+            cout<<"and bought it for $"<<prop.getprce()<<endl;
             c.setPrps();
         }
     }
@@ -159,11 +157,15 @@ void prcsOpt(int decide,Player &u,Property &prop){
     
     //Process the Menu Decision
     if(decide==1){
-        cout<<"$"<<prop.getprce()<<" was deducted from your account."<<endl;
-        int total=u.getMony()-prop.getprce();
-        u.setMony(total);
-        u.setPrps();
-        cout<<"Congratulations on your purchase!"<<endl;
+        if(u.findPrp(u.getSpot())==true)
+            cout<<"You already own this property "<<u.getName()<<endl;
+        else{
+            cout<<"$"<<prop.getprce()<<" was deducted from your account."<<endl;
+            int total=u.getMony()-prop.getprce();
+            u.setMony(total);
+            u.setPrps();
+            cout<<"Congratulations on your purchase!"<<endl;
+        }
     }
     else if(decide==2)
         cout<<"Thanks for the visit!"<<endl;
@@ -182,7 +184,7 @@ void prcsOpt(int decide,Player &u,Property &prop){
 }
 
 int validte(int option){
-    cin>>option;          //Overload the >> operator to display player info
+    cin>>option;          
     if(option<1||option>4){
         string except = "ERROR: That is not a valid entry!\n";
         throw except;
@@ -225,7 +227,7 @@ int dieRoll(){
     
     return die1.getVal()+die2.getVal();
 }
-
+    
 void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     Rules check;
     ChncCom temp;
@@ -234,7 +236,7 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     //Check for Special "Properties"
     if(spot.getname()=="Chance"){
         temp.setMess(1,chnindx,u,c,check);
-        cout<<endl<<temp.getMess()<<endl;
+        cout<<temp.getMess()<<endl;
         chnindx++;  
         check.indxset(chnindx);
         if(u.getSpot()==30)
@@ -242,7 +244,7 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
     }
     else if(spot.getname()=="Community Chest"){
         temp.setMess(2,comindx,u,c,check);
-        cout<<endl<<temp.getMess()<<endl;
+        cout<<temp.getMess()<<endl;
         comindx++;
         check.indxset(comindx);
         if(u.getSpot()==30)
@@ -261,7 +263,6 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
         if(c.findPrp(u.getSpot())==true){
             if(spot.getcolr()=="RR"){
                 u.payRent(RR.setrent(c,u.getSpot()));
-                cout<<endl;
                 cout<<c.getName()<<" already owns "<<spot.getPos(u.getSpot());
                 cout<<" which is the "<<RR.getPos(u.getSpot())<<" railroad. ";
                 cout<<"You owe them $"<<RR.setrent(c,u.getSpot());
@@ -282,7 +283,6 @@ void check(Player &u,Player &c,Property &spot,short &comindx,short &chnindx){
             }
             else{
                 u.payRent(spot.getrent());
-                cout<<endl;
                 cout<<c.getName()<<" already owns "<<spot.getname()<<". ";
                 cout<<"You owe them $"<<spot.getrent()<<" of rent."<<endl;
                 c.setMony(c.getMony()+spot.getrent());

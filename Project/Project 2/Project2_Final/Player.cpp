@@ -36,7 +36,7 @@ void Player::setMony(int mon){
     money=mon;
 }
 
-void *Player::setPrps(){
+void Player::setPrps(){
     *(proprty+nProps)=spot;
     nProps++;
 }
@@ -67,7 +67,7 @@ void Player::setNHse(){
     }
     cout<<"You currently own: "<<endl;
     for(int i=0;i<8;i++){
-        cout<<*(colors+i)<<" "<<prop.colList(i)<<" contains ";
+        cout<<*(colors+i)<<" "<<prop.colList(i)<<" ,which contains ";
         cout<<prop.setcMax(prop.colList(i))<<" total properties"<<endl;
         if(*(colors+i)==prop.setcMax(prop.colList(i))){
             cout<<"Would you like to add houses here? The cost per house is $";
@@ -118,7 +118,7 @@ unsigned short Player::getNPrp()const{
     return nProps;
 }
 
-void *Player::getPrps(){
+void Player::getPrps(){
     for(int i=0;i<nProps;i++)
         cout<<*(proprty+i)<<" ";
 }

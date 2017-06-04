@@ -16,10 +16,10 @@ class Rules;
 
 class ChncCom{
     private:
-        string message;
+        string message;   //Message displayed on Chance/Community Chest cards
     public:
         ChncCom();
-        void setMess(unsigned short,short,Player &,Player &,Rules &);  //Friend
+        void setMess(unsigned short,short,Player &,Player &,Rules &);
         string getMess()const;
 };
 
